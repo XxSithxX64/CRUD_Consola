@@ -1,4 +1,7 @@
-﻿using CRUD_Consola.Infrastructure.Data;
+﻿using CRUD_Consola._2.Infrastructure.Repositories;
+using CRUD_Consola.Application.Services;
+using CRUD_Consola.Infrastructure.Data;
+using CRUD_Consola.UI;
 using CRUD_Consola.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +22,15 @@ var options = new DbContextOptionsBuilder<AppDbContext>()
     .UseSqlServer(connectionString)
     .Options;
 
-//4. Llamar al metodo que verifica la existencia de la base de datos y crea la base de datos si no existe
-DatabaseConUtils.EnsureDatabaseCreated(options);
+//4. Crear una instancia del contexto BloggingContext
+using var context = new AppDbContext(options);
 
+//5. Llamar al metodo que verifica la existencia de la base de datos y crea la base de datos si no existe
+DatabaseConUtils.EnsureDatabaseCreated(context);
+
+//6. Crear una instancia del servicio de cliente
+var clienteService = new ClienteService(new ClienteRepository(context));
+
+//7 Ahora delegas la UI a la clase
+var ui = new ClienteConsoleUI(clienteService);
+ui.MostrarMenu();

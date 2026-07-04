@@ -6,10 +6,8 @@ namespace CRUD_Consola.Utils
 {
     internal class DatabaseConUtils
     {
-        public static void EnsureDatabaseCreated(DbContextOptions<AppDbContext> options)
+        public static void EnsureDatabaseCreated(AppDbContext context)
         {
-            //4. Crear una instancia del contexto BloggingContext
-            using var context = new AppDbContext(options);
 
             try
             {
