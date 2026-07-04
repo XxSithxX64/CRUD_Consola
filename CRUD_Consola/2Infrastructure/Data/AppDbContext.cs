@@ -1,14 +1,11 @@
 ﻿using CRUD_Consola.Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CRUD_Consola.Infrastructure.Data
 {
-    internal class AppDbContext: DbContext
+    internal class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) 
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }
 
         public DbSet<Cliente> Clientes { get; set; }
@@ -21,5 +18,6 @@ namespace CRUD_Consola.Infrastructure.Data
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
+        
     }
 }

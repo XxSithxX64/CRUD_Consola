@@ -1,10 +1,10 @@
-﻿using CRUD_Consola.Core.Entities;
-using CRUD_Consola.Core.Interfaces;
+﻿using CRUD_Consola._1.Core.Interfaces;
+using CRUD_Consola.Core.Entities;
 using CRUD_Consola.Infrastructure.Data;
 
 namespace CRUD_Consola._2.Infrastructure.Repositories
 {
-    internal class ClienteRepository : IClienteRepository
+    internal class ClienteRepository : IPersonaRepository<Cliente>
     {
         private readonly AppDbContext context;
 
@@ -13,21 +13,19 @@ namespace CRUD_Consola._2.Infrastructure.Repositories
             this.context = context;
         }
 
-        public Cliente GetById(int id) =>
-            context.Clientes.FirstOrDefault(c => c.ClienteId == id);
+        public Cliente GetById(int id) => context.Clientes.Find(id);
 
-        public IEnumerable<Cliente> GetAll() =>
-            context.Clientes.ToList();
+        public IEnumerable<Cliente> GetAll() => context.Clientes.ToList();
 
-        public void Add(Cliente cliente)
+        public void Add(Cliente entidad)
         {
-            context.Clientes.Add(cliente);
+            context.Clientes.Add(entidad);
             context.SaveChanges();
         }
 
-        public void Update(Cliente cliente)
+        public void Update(Cliente entidad)
         {
-            context.Clientes.Update(cliente);
+            context.Clientes.Update(entidad);
             context.SaveChanges();
         }
 

@@ -32,5 +32,5 @@ DatabaseConUtils.EnsureDatabaseCreated(context);
 var clienteService = new ClienteService(new ClienteRepository(context));
 
 //7 Ahora delegas la UI a la clase
-var ui = new ClienteConsoleUI(clienteService);
-ui.MostrarMenu();
+var uiCliente = new ClienteConsoleUI(clienteService);
+uiCliente.MostrarMenu();
