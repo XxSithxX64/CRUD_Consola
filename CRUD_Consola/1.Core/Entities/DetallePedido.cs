@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CRUD_Consola.Core.Entities
 {
     internal class DetallePedido
     {
+        [Key]
         public int DetalleId { get; set; }
         public int PedidoId { get; set; }
         public Pedido? Pedido { get; set; }
