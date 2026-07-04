@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CRUD_Consola.Core.Entities
+﻿namespace CRUD_Consola.Core.Entities
 {
     internal class Cliente
     {

@@ -1,28 +1,24 @@
 ﻿using CRUD_Consola.Infrastructure.Data;
+using CRUD_Consola.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
+// 1. ConfigurationBuilder. nos permite leer archivos de configuracion externos
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json",
                  optional: false,
                  reloadOnChange: true)
     .Build();
+
+//2. obtener la cadena de conexion 
 var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+//3. Configurar las opciones que necesita el InventarioContext
+// sqlserver
 var options = new DbContextOptionsBuilder<AppDbContext>()
     .UseSqlServer(connectionString)
     .Options;
 
-using var context = new AppDbContext(options);
-try
-{
-    Console.WriteLine("Probando conexión a la base de datos...");
-    bool canConnect = context.Database.CanConnect();
-    Console.WriteLine(canConnect
-        ? "✅ Conexión exitosa con la base de datos."
-        : "❌ No se pudo conectar a la base de datos.");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Error de conexión: {ex.Message}");
-}
+//4. Llamar al metodo que verifica la existencia de la base de datos y crea la base de datos si no existe
+DatabaseConUtils.EnsureDatabaseCreated(options);
+

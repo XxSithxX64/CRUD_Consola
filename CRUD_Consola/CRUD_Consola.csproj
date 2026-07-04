@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="Application\" />
     <Folder Include="UI\" />
-    <Folder Include="Utils\" />
     <Folder Include="2.Infrastructure\Repositories\" />
     <Folder Include="Application\Services\" />
   </ItemGroup>
