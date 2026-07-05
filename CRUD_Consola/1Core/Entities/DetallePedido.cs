@@ -14,5 +14,11 @@ namespace CRUD_Consola.Core.Entities
 
         public int Cantidad { get; set; }
         public decimal PrecioUnitario { get; set; }
+
+        public override string ToString()
+        {
+            return $"DetalleId: {DetalleId}, PedidoId: {PedidoId}, ProductoId: {ProductoId}, " +
+                   $"Cantidad: {Cantidad}, PrecioUnitario: {PrecioUnitario:C}";
+        }
     }
 }

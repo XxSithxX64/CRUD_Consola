@@ -13,5 +13,10 @@
 
         public ICollection<DetallePedido> Detalles { get; set; } = new List<DetallePedido>();
         public Factura? Factura { get; set; }
+
+        public override string ToString()
+        {
+            return $"PedidoId: {PedidoId}, Fecha: {Fecha}, ClienteId: {ClienteId}, EmpleadoId: {EmpleadoId}";
+        }
     }
 }

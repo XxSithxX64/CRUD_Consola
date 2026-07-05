@@ -10,5 +10,11 @@
         public decimal MontoTotal { get; set; }
 
         public ICollection<Pago> Pagos { get; set; } = new List<Pago>();
+
+        public override string ToString()
+        {
+            return $"FacturaId: {FacturaId}, PedidoId: {PedidoId}, FechaEmision: {FechaEmision:dd/MM/yyyy}, " +
+                   $"MontoTotal: {MontoTotal:C}";
+        }
     }
 }
