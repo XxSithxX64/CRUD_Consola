@@ -4,6 +4,6 @@ namespace CRUD_Consola._1Core.IService
 {
     public interface IPedidoService : IService<Pedido>
     {
-        IEnumerable<Pedido> ObtenerPedidosDetallados();>
+        IEnumerable<Pedido> ObtenerPedidosDetallados();
     }
 }

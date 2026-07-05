@@ -39,12 +39,15 @@ namespace CRUD_Consola._3Application.UnitOfWork
             _categoriaService ??= new Service<Categoria>(new Repository<Categoria>(context));
 
         public IProductoService ProductoService =>
-            _productoService ??= new ProductoService(new ProductoRepository(context));
-
-        public IEmpleadoService IEmpleadoService =>
-            _empleadoService ??= new EmpleadoService(new EmpleadoRepository(context));            
+            _productoService ??= new ProductoService(new ProductoRepository(context));         
 
         public IPedidoService IPedidoService =>
+            _pedidoService ??= new PedidoService(new PedidoRepository(context));
+
+        public IEmpleadoService EmpleadoService =>
+            _empleadoService ??= new EmpleadoService(new EmpleadoRepository(context));
+
+        public IPedidoService PedidoService => 
             _pedidoService ??= new PedidoService(new PedidoRepository(context));
 
         public void SaveChanges()

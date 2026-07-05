@@ -11,6 +11,7 @@ namespace CRUD_Consola._4UI
         private readonly CategoriaConsoleUI _categoriaConsoleUI;
         private readonly ProductoConsoleUI _productoConsoleUI;
         private readonly EmpleadoConsoleUI _empleadoConsoleUI;
+        private readonly PedidoConsoleUI _pedidoConsoleUI;
 
         public MenuConsoleUI(IUnitOfWork uow)
         {
@@ -20,6 +21,7 @@ namespace CRUD_Consola._4UI
             _categoriaConsoleUI = new CategoriaConsoleUI(uow);
             _productoConsoleUI = new ProductoConsoleUI(uow);
             _empleadoConsoleUI = new EmpleadoConsoleUI(uow);
+            _pedidoConsoleUI = new PedidoConsoleUI(uow);
         }
 
         public void MostrarMenu()
@@ -35,6 +37,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("4. CRUD Categoria");
                 Console.WriteLine("5. CRUD Producto");
                 Console.WriteLine("6. CRUD Empleados");
+                Console.WriteLine("7. CRUD Pedido");
                 Console.WriteLine("0. Salir");
                 Console.Write("Opción: ");
                 var opcion = Console.ReadLine();
@@ -53,6 +56,8 @@ namespace CRUD_Consola._4UI
                         Console.Clear(); _productoConsoleUI.MostrarMenu(); break;
                     case "6":
                         Console.Clear(); _empleadoConsoleUI.MostrarMenu(); break;
+                    case "7":
+                        Console.Clear(); _pedidoConsoleUI.MostrarMenu(); break;
                     case "0":
                         salir = true;
                         break;
