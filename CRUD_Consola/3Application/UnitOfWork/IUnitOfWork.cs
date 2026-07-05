@@ -1,14 +1,16 @@
-﻿using CRUD_Consola._3.Application.Services.Interfaces;
-using CRUD_Consola._3Application.Services.Interfaces;
+﻿using CRUD_Consola._1Core.IService;
+using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._3Application.UnitOfWork
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
-        IClienteService ClienteService { get; }
-        ISucursalService SucursalService { get; }
-        IProveedorService ProveedorService { get; }
-        ICategoriaService CategoriaService { get; }
+        IService<Cliente> ClienteService { get; }
+        IService<Sucursal>SucursalService { get; }
+        IService<Proveedor>ProveedorService { get; }
+        IService<Categoria> CategoriaService { get; }
         IProductoService ProductoService { get; }
+        IEmpleadoService IEmpleadoService { get; }
+        void SaveChanges();
     }
 }

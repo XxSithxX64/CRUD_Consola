@@ -1,51 +1,19 @@
-﻿using CRUD_Consola._3Application.Services.Interfaces;
+﻿using CRUD_Consola._1Core.IRepository;
+using CRUD_Consola._1Core.IService;
 using CRUD_Consola.Core.Entities;
-using CRUD_Consola.Core.Interfaces;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class ProductoService : IProductoService
+    internal class ProductoService : Service<Producto>, IProductoService
     {
         private readonly IProductoRepository productoRepository;
-
-        public ProductoService(IProductoRepository productoRepository)
+        public ProductoService(IProductoRepository productoRepository) : base(productoRepository)
         {
             this.productoRepository = productoRepository;
         }
-
-        public Producto BuscarProducto(int id)
+        public IEnumerable<Producto> ObtenerProductosDetallados()
         {
-            return productoRepository.GetById(id);
+            return productoRepository.ListarConRelaciones();
         }
-
-        public IEnumerable<Producto> ListarProductos()
-        {
-            return productoRepository.GetAll();
-        }
-
-        public void CrearProducto(Producto producto)
-        {
-            productoRepository.Add(producto);
-        }
-
-        public void ActualizarProducto(Producto producto)
-        {
-            productoRepository.Update(producto);
-        }
-
-        public void EliminarProducto(int id)
-        {
-            productoRepository.Delete(id);
-        }
-
-        public IEnumerable<Producto> ListarPorCategoria(int categoriaId)
-        {
-            return productoRepository.GetByCategoria(categoriaId);
-        }
-
-        public IEnumerable<Producto> ListarPorProveedor(int proveedorId)
-        {
-            return productoRepository.GetByProveedor(proveedorId);
-        }
-    }
+    }        
 }

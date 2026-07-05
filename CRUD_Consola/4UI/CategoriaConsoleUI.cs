@@ -1,5 +1,4 @@
-﻿using CRUD_Consola._3Application.Services.Interfaces;
-using CRUD_Consola._3Application.UnitOfWork;
+﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
@@ -47,7 +46,8 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Ingrese los datos de la categoría:");
             Console.WriteLine("----------------------------------");
             var categoria = CapturarDatosCategoria();
-            _uow.CategoriaService.CrearCategoria(categoria);
+            _uow.CategoriaService.Crear(categoria);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Categoría registrada correctamente.");
         }
 
@@ -55,7 +55,7 @@ namespace CRUD_Consola._4UI
         {
             Console.WriteLine("Lista de Categorías:");
             Console.WriteLine("--------------------");
-            var categorias = _uow.CategoriaService.ListarCategorias();
+            var categorias = _uow.CategoriaService.Listar();
             foreach (var c in categorias)
                 Console.WriteLine(c.ToString());
             Console.WriteLine();
@@ -67,7 +67,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("---------------------------");
             Console.Write("Ingrese el ID de la categoría: ");
             var id = int.Parse(Console.ReadLine());
-            var categoria = _uow.CategoriaService.BuscarCategoria(id);
+            var categoria = _uow.CategoriaService.Buscar(id);
             if (categoria != null)
                 Console.WriteLine(categoria.ToString());
             else 
@@ -80,7 +80,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("---------------------");
             Console.Write("Ingrese el ID de la categoría a actualizar: ");
             var id = int.Parse(Console.ReadLine());
-            var categoria = _uow.CategoriaService.BuscarCategoria(id);
+            var categoria = _uow.CategoriaService.Buscar(id);
             if (categoria == null)
             {
                 Console.WriteLine("❌ Categoría no encontrada.");
@@ -97,7 +97,8 @@ namespace CRUD_Consola._4UI
             var descripcion = Console.ReadLine();
             if(!string.IsNullOrWhiteSpace(descripcion)) categoria.Descripcion = descripcion;
 
-            _uow.CategoriaService.ActualizarCategoria(categoria);
+            _uow.CategoriaService.Actualizar(categoria);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Categoría actualizada correctamente.");
         }
 
@@ -107,13 +108,14 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("-------------------");
             Console.Write("Ingrese el ID de la categoría a eliminar: ");
             var id = int.Parse(Console.ReadLine());
-            var categoria = _uow.CategoriaService.BuscarCategoria(id);
+            var categoria = _uow.CategoriaService.Buscar(id);
             if (categoria == null)
             {
                 Console.WriteLine("❌ Categoría no encontrada.");
                 return;
             }
-            _uow.CategoriaService.EliminarCategoria(id);
+            _uow.CategoriaService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Categoría eliminada correctamente.");
         }
 

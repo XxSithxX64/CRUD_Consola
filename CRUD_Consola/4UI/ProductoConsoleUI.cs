@@ -1,5 +1,4 @@
-﻿using CRUD_Consola._3Application.Services.Interfaces;
-using CRUD_Consola._3Application.UnitOfWork;
+﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
@@ -24,6 +23,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("3. Buscar Producto por ID");
                 Console.WriteLine("4. Actualizar Producto");
                 Console.WriteLine("5. Eliminar Producto");
+                Console.WriteLine("6. Listar Productos Detallados (con Categoría y Proveedor)");
                 Console.WriteLine("0. Salir");
                 Console.WriteLine();
                 Console.Write("Opción: ");
@@ -36,6 +36,7 @@ namespace CRUD_Consola._4UI
                     case "3": Console.Clear(); BuscarProductoUI(); break;
                     case "4": Console.Clear(); ActualizarProductoUI(); break;
                     case "5": Console.Clear(); EliminarProductoUI(); break;
+                    case "6": Console.Clear(); MostrarProductosDetallados(); break;
                     case "0": salir = true; break;
                     default: Console.WriteLine("❌ Opción inválida."); break;
                 }
@@ -43,20 +44,22 @@ namespace CRUD_Consola._4UI
         }
 
         private void CrearProductoUI() 
-        { 
+        {
+            Console.Clear();
             Console.WriteLine("Ingrese los datos del producto:");
             Console.WriteLine("-------------------------------");
             var producto = CapturarDatosProducto();
-            _uow.ProductoService.CrearProducto(producto);
+            _uow.ProductoService.Crear(producto);
             Console.WriteLine("✅ Producto registrado correctamente.");
             Console.WriteLine();
         }
 
         private void ListarProductosUI()
         {
+            Console.Clear();
             Console.WriteLine("Lista de Productos:");
             Console.WriteLine("-------------------");
-            var productos = _uow.ProductoService.ListarProductos();
+            var productos = _uow.ProductoService.Listar();
             foreach (var p in productos)
                 Console.WriteLine(p.ToString());
             Console.WriteLine();
@@ -64,11 +67,12 @@ namespace CRUD_Consola._4UI
 
         public void BuscarProductoUI()
         {
+            Console.Clear();
             Console.WriteLine("Buscar Producto por ID:");
             Console.WriteLine("-----------------------");
             Console.Write("Ingrese el ID del producto: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var producto = _uow.ProductoService.BuscarProducto(id);
+            var producto = _uow.ProductoService.Buscar(id);
             if(producto != null)
                 Console.WriteLine(producto.ToString());
             else
@@ -78,11 +82,12 @@ namespace CRUD_Consola._4UI
 
         private void ActualizarProductoUI()
         {
+            Console.Clear();
             Console.WriteLine("Actualizar Producto:");
             Console.WriteLine("--------------------");
             Console.Write("Ingrese el ID del producto a actualizar: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var producto= _uow.ProductoService.BuscarProducto(id);
+            var producto= _uow.ProductoService.Buscar(id);
             
             if(producto== null)
             {
@@ -106,7 +111,7 @@ namespace CRUD_Consola._4UI
 
             // Mostrar categorías
             Console.WriteLine("=== Categorías disponibles ===");
-            foreach (var categoria in _uow.CategoriaService.ListarCategorias())
+            foreach (var categoria in _uow.CategoriaService.Listar())
             {
                 Console.WriteLine($"{categoria.CategoriaId} - {categoria.Nombre}");
             }
@@ -116,7 +121,7 @@ namespace CRUD_Consola._4UI
 
             // Mostrar proveedores
             Console.WriteLine("=== Proveedores disponibles ===");
-            foreach (var proveedor in _uow.ProveedorService.ListarProveedores())
+            foreach (var proveedor in _uow.ProveedorService.Listar())
             {
                 Console.WriteLine($"{proveedor.ProveedorId} - {proveedor.Nombre} ({proveedor.Contacto})");
             }
@@ -124,25 +129,40 @@ namespace CRUD_Consola._4UI
             var proveedorId = Convert.ToInt32(Console.ReadLine());
             if(!string.IsNullOrWhiteSpace(proveedorId.ToString())) producto.ProveedorId = proveedorId;
 
-            _uow.ProductoService.ActualizarProducto(producto);
+            _uow.ProductoService.Actualizar(producto);
             Console.WriteLine("✅ Producto actualizado correctamente.");
             Console.WriteLine();
         }
 
         private void EliminarProductoUI()
         {
+            Console.Clear();
             Console.WriteLine("Eliminar Producto:");
             Console.WriteLine("------------------");
             Console.Write("Ingrese el ID del producto a eliminar: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var producto = _uow.ProductoService.BuscarProducto(id);
+            var producto = _uow.ProductoService.Buscar(id);
             if (producto == null)
             {
                 Console.WriteLine("❌ Producto no encontrado.");
                 return;
             }
-            _uow.ProductoService.EliminarProducto(id);
+            _uow.ProductoService.Eliminar(id);
             Console.WriteLine("✅ Producto eliminado correctamente.");
+        }
+
+        public void MostrarProductosDetallados()
+        {
+            Console.Clear();
+            var productos = _uow.ProductoService.ObtenerProductosDetallados();
+
+            Console.WriteLine("=== Lista de Productos con Categoría y Proveedor ===");
+            foreach (var p in productos)
+            {
+                Console.WriteLine($"{p.ProductoId}, {p.Nombre}, {p.Precio}, {p.Stock}, " +
+                                  $"{p.Categoria?.Nombre}, {p.Proveedor?.Nombre}");
+            }
+            Console.WriteLine();
         }
 
         private Producto CapturarDatosProducto()
@@ -158,7 +178,7 @@ namespace CRUD_Consola._4UI
 
             // Mostrar categorías
             Console.WriteLine("=== Categorías disponibles ===");
-            foreach (var categoria in _uow.CategoriaService.ListarCategorias())
+            foreach (var categoria in _uow.CategoriaService.Listar())
             {
                 Console.WriteLine($"{categoria.CategoriaId} - {categoria.Nombre}");
             }
@@ -167,7 +187,7 @@ namespace CRUD_Consola._4UI
 
             // Mostrar proveedores
             Console.WriteLine("=== Proveedores disponibles ===");
-            foreach (var proveedor in _uow.ProveedorService.ListarProveedores())
+            foreach (var proveedor in _uow.ProveedorService.Listar())
             {
                 Console.WriteLine($"{proveedor.ProveedorId} - {proveedor.Nombre} ({proveedor.Contacto})");
             }

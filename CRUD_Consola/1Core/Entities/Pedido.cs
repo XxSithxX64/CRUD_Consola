@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Pedido
+    public class Pedido
     {
         public int PedidoId { get; set; }
         public DateTime Fecha { get; set; }

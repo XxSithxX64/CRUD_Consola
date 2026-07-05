@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Cliente : Persona
+    public class Cliente : Persona
     {
         public DateTime FechaRegistro { get; set; } = DateTime.Now;
         public bool Activo { get; set; } = true;

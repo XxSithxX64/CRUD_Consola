@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Proveedor
+    public class Proveedor
     {
         public int ProveedorId { get; set; }
         public string Nombre { get; set; } = string.Empty;

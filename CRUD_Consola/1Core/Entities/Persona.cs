@@ -2,7 +2,7 @@
 
 namespace CRUD_Consola.Core.Entities
 {
-    internal abstract class Persona
+    public abstract class Persona
     {
         [Key]
         public int PersonaId { get; set; }
@@ -14,5 +14,12 @@ namespace CRUD_Consola.Core.Entities
         public string Email { get; set; } = string.Empty;
         public string Telefono { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
+
+        public override string ToString()
+        {
+            return $"[{PersonaId}] {Nombres} {ApellidoPat} {ApellidoMat} - " +
+                   $"DNI: {DocIdentidad}, Nac: {FechaNacimiento:dd/MM/yyyy}, " +
+                   $"Email: {Email}, Tel: {Telefono}, Dir: {Direccion}";
+        }
     }
 }

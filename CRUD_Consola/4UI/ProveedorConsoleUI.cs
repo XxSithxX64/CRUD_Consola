@@ -1,5 +1,4 @@
-﻿using CRUD_Consola._3Application.Services.Interfaces;
-using CRUD_Consola._3Application.UnitOfWork;
+﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
@@ -47,7 +46,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Ingrese los datos del proveedor:");
             Console.WriteLine("--------------------------------");
             var proveedor = CapturarDatosProveedor();
-            _uow.ProveedorService.CrearProveedor(proveedor);
+            _uow.ProveedorService.Crear(proveedor);
             Console.WriteLine("✅ Proveedor registrado correctamente.");
             Console.WriteLine();
         }
@@ -56,7 +55,7 @@ namespace CRUD_Consola._4UI
         {
             Console.WriteLine("Lista de Proveedores:");
             Console.WriteLine("---------------------");
-            var proveedores = _uow.ProveedorService.ListarProveedores();
+            var proveedores = _uow.ProveedorService.Listar();
             foreach (var p in proveedores)
                 Console.WriteLine(p.ToString());
             Console.WriteLine();
@@ -68,7 +67,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("---------------------------");
             Console.Write("Ingrese el ID del proveedor: ");
             var id = int.Parse(Console.ReadLine());
-            var proveedor = _uow.ProveedorService.BuscarProveedor(id);
+            var proveedor = _uow.ProveedorService.Buscar(id);
             if (proveedor != null)
                 Console.WriteLine(proveedor.ToString());
             else
@@ -82,7 +81,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("---------------------");
             Console.Write("Ingrese el ID del proveedor a actualizar: ");
             var id = int.Parse(Console.ReadLine());
-            var proveedor = _uow.ProveedorService.BuscarProveedor(id);
+            var proveedor = _uow.ProveedorService.Buscar(id);
             if (proveedor == null)
             {
                 Console.WriteLine("❌ Proveedor no encontrado.");
@@ -103,7 +102,7 @@ namespace CRUD_Consola._4UI
             var telefono = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(telefono)) proveedor.Telefono = telefono;
 
-            _uow.ProveedorService.ActualizarProveedor(proveedor);
+            _uow.ProveedorService.Actualizar(proveedor);
             Console.WriteLine("✅ Proveedor actualizado correctamente.");
             Console.WriteLine();
         }
@@ -114,13 +113,13 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("-------------------");
             Console.Write("Ingrese el ID del proveedor a eliminar: ");
             var id = int.Parse(Console.ReadLine());
-            var proveedor = _uow.ProveedorService.BuscarProveedor(id);
+            var proveedor = _uow.ProveedorService.Buscar(id);
             if (proveedor == null)
             {
                 Console.WriteLine("❌ Proveedor no encontrado.");
                 return;
             }
-            _uow.ProveedorService.EliminarProveedor(id);
+            _uow.ProveedorService.Eliminar(id);
             Console.WriteLine("✅ Proveedor eliminado correctamente.");
             Console.WriteLine();
         }

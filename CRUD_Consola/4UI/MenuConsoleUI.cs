@@ -10,6 +10,7 @@ namespace CRUD_Consola._4UI
         private readonly ProveedorConsoleUI _proveedorConsoleUI;
         private readonly CategoriaConsoleUI _categoriaConsoleUI;
         private readonly ProductoConsoleUI _productoConsoleUI;
+        private readonly EmpleadoConsoleUI _empleadoConsoleUI;
 
         public MenuConsoleUI(IUnitOfWork uow)
         {
@@ -18,6 +19,7 @@ namespace CRUD_Consola._4UI
             _proveedorConsoleUI = new ProveedorConsoleUI(uow);
             _categoriaConsoleUI = new CategoriaConsoleUI(uow);
             _productoConsoleUI = new ProductoConsoleUI(uow);
+            _empleadoConsoleUI = new EmpleadoConsoleUI(uow);
         }
 
         public void MostrarMenu()
@@ -32,6 +34,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("3. CRUD Proveedores");
                 Console.WriteLine("4. CRUD Categoria");
                 Console.WriteLine("5. CRUD Producto");
+                Console.WriteLine("6. CRUD Empleados");
                 Console.WriteLine("0. Salir");
                 Console.Write("Opción: ");
                 var opcion = Console.ReadLine();
@@ -39,25 +42,17 @@ namespace CRUD_Consola._4UI
                 switch (opcion)
                 {
                     case "1":
-                        Console.Clear();
-                        _clienteConsoleUI.MostrarMenu();
-                        break;
+                        Console.Clear(); _clienteConsoleUI.MostrarMenu(); break;
                     case "2":
-                        Console.Clear();
-                        _sucursalConsoleUI.MostrarMenu();
-                        break;
+                        Console.Clear(); _sucursalConsoleUI.MostrarMenu(); break;
                     case "3":
-                        Console.Clear();
-                        _proveedorConsoleUI.MostrarMenu();
-                        break;
+                        Console.Clear(); _proveedorConsoleUI.MostrarMenu(); break;
                     case "4":
-                        Console.Clear();
-                        _categoriaConsoleUI.MostrarMenu();
-                        break;
+                        Console.Clear(); _categoriaConsoleUI.MostrarMenu(); break;
                     case "5":
-                        Console.Clear();
-                        _productoConsoleUI.MostrarMenu();
-                        break;
+                        Console.Clear(); _productoConsoleUI.MostrarMenu(); break;
+                    case "6":
+                        Console.Clear(); _empleadoConsoleUI.MostrarMenu(); break;
                     case "0":
                         salir = true;
                         break;

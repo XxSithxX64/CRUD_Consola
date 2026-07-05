@@ -2,7 +2,7 @@
 
 namespace CRUD_Consola.Core.Entities
 {
-    internal class DetallePedido
+    public class DetallePedido
     {
         [Key]
         public int DetalleId { get; set; }

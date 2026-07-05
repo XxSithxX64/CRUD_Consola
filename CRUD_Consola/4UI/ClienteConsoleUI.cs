@@ -1,5 +1,4 @@
-﻿using CRUD_Consola._3.Application.Services.Interfaces;
-using CRUD_Consola._3Application.UnitOfWork;
+﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola.UI
@@ -48,7 +47,7 @@ namespace CRUD_Consola.UI
             Console.WriteLine("Ingrese los datos del cliente:");
             Console.WriteLine("------------------------------");
             var cliente = CapturarDatosCliente();
-            _uow.ClienteService.CrearCliente(cliente);
+            _uow.ClienteService.Crear(cliente);
             Console.WriteLine("✅ Cliente registrado correctamente.");
             Console.WriteLine();
         }
@@ -57,7 +56,7 @@ namespace CRUD_Consola.UI
         {
             Console.WriteLine("Lista de Clientes:");
             Console.WriteLine("------------------");
-            var clientes = _uow.ClienteService.ListarClientes();
+            var clientes = _uow.ClienteService.Listar();
             foreach (var c in clientes)
                 //Console.WriteLine($"{c.PersonaId} - {c.Nombres} {c.ApellidoPat} {c.ApellidoMat} ({c.Email})");
                 Console.WriteLine(c.ToString());
@@ -70,7 +69,7 @@ namespace CRUD_Consola.UI
             Console.WriteLine("----------------------");
             Console.Write("Ingrese ID del cliente: ");
             int id = int.Parse(Console.ReadLine());
-            var cliente = _uow.ClienteService.BuscarCliente(id);
+            var cliente = _uow.ClienteService.Buscar(id);
             if (cliente != null)
                 Console.WriteLine(cliente.ToString());
             else
@@ -84,7 +83,7 @@ namespace CRUD_Consola.UI
             Console.WriteLine("-------------------");
             Console.Write("Ingrese ID del cliente a actualizar: ");
             int id = int.Parse(Console.ReadLine());
-            var cliente = _uow.ClienteService.BuscarCliente(id);
+            var cliente = _uow.ClienteService.Buscar(id);
 
             if (cliente == null)
             {
@@ -127,7 +126,7 @@ namespace CRUD_Consola.UI
             if (!string.IsNullOrWhiteSpace(activo))
                 cliente.Activo = activo.Trim().ToLower() == "s" || activo.Trim().ToLower() == "true";
 
-            _uow.ClienteService.ActualizarCliente(cliente);
+            _uow.ClienteService.Actualizar(cliente);
             Console.WriteLine("✅ Cliente actualizado correctamente.");
             Console.WriteLine();
         }
@@ -138,7 +137,7 @@ namespace CRUD_Consola.UI
             Console.WriteLine("-----------------");
             Console.Write("Ingrese ID del cliente a eliminar: ");
             int id = int.Parse(Console.ReadLine());
-            _uow.ClienteService.EliminarCliente(id);
+            _uow.ClienteService.Eliminar(id);
             Console.WriteLine("✅ Cliente eliminado correctamente.");
             Console.WriteLine();
         }

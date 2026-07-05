@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Sucursal
+    public class Sucursal
     {
         public int SucursalId { get; set; }
         public string Nombre { get; set; } = string.Empty;

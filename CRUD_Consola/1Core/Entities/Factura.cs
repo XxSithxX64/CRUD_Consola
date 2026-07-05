@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Factura
+    public class Factura
     {
         public int FacturaId { get; set; }
         public int PedidoId { get; set; }

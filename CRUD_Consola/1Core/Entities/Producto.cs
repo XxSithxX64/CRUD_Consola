@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola.Core.Entities
 {
-    internal class Producto
+    public class Producto
     {
         public int ProductoId { get; set; }
         public string Nombre { get; set; } = string.Empty;
@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"{ProductoId}, {Nombre}, {Precio}, {Stock}, {Categoria.Nombre}, {Proveedor.Nombre}, {Proveedor.Contacto}";
+            return $"{ProductoId}, {Nombre}, {Precio}, {Stock}, {CategoriaId}, {ProveedorId}";
         }
     }
 }

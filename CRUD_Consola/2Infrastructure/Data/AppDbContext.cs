@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola.Infrastructure.Data
 {
-    internal class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }
@@ -19,5 +19,7 @@ namespace CRUD_Consola.Infrastructure.Data
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
         
+
+
     }
 }
