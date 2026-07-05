@@ -14,5 +14,10 @@
         public Proveedor? Proveedor { get; set; }
 
         public ICollection<DetallePedido> Detalles { get; set; } = new List<DetallePedido>();
+
+        public override string ToString()
+        {
+            return $"{ProductoId}, {Nombre}, {Precio}, {Stock}, {Categoria.Nombre}, {Proveedor.Nombre}, {Proveedor.Contacto}";
+        }
     }
 }

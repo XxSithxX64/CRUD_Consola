@@ -1,13 +1,13 @@
-﻿using CRUD_Consola._3Application.Services;
+﻿using CRUD_Consola._3Application.Services.Interfaces;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
     internal class ProveedorConsoleUI
     {
-        private readonly ProveedorService _proveedorService;
+        private readonly IProveedorService _proveedorService;
 
-        public ProveedorConsoleUI(ProveedorService proveedorService)
+        public ProveedorConsoleUI(IProveedorService proveedorService)
         {
             _proveedorService = proveedorService;
         }
@@ -48,6 +48,7 @@ namespace CRUD_Consola._4UI
             var proveedor = CapturarDatosProveedor();
             _proveedorService.CrearProveedor(proveedor);
             Console.WriteLine("✅ Proveedor registrado correctamente.");
+            Console.WriteLine();
         }
 
         private void ListarProveedoresUI()
@@ -71,6 +72,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine(proveedor.ToString());
             else
                 Console.WriteLine("❌ Proveedor no encontrado.");
+            Console.WriteLine();
         }
 
         private void ActualizarProveedorUI()
@@ -86,7 +88,7 @@ namespace CRUD_Consola._4UI
                 return;
             }
 
-            Console.WriteLine("ngrese nuevos datos (dejar vacío para mantener el actual):");
+            Console.WriteLine("Ingrese nuevos datos (dejar vacío para mantener el actual):");
 
             Console.Write($"Nombre ({proveedor.Nombre}): ");
             var nombre = Console.ReadLine();
@@ -102,6 +104,7 @@ namespace CRUD_Consola._4UI
 
             _proveedorService.ActualizarProveedor(proveedor);
             Console.WriteLine("✅ Proveedor actualizado correctamente.");
+            Console.WriteLine();
         }
 
         private void EliminarProveedorUI()
@@ -118,16 +121,20 @@ namespace CRUD_Consola._4UI
             }
             _proveedorService.EliminarProveedor(id);
             Console.WriteLine("✅ Proveedor eliminado correctamente.");
+            Console.WriteLine();
         }
 
         private Proveedor CapturarDatosProveedor()
         {
             Console.Write("Nombre: ");
             var nombre = Console.ReadLine();
+
             Console.Write("Contacto: ");
             var contacto = Console.ReadLine();
+
             Console.Write("Teléfono: ");
             var telefono = Console.ReadLine();
+
             return new Proveedor
             {
                 Nombre = nombre,

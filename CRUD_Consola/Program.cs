@@ -26,17 +26,22 @@ var options = new DbContextOptionsBuilder<AppDbContext>()
     .Options;
 
 //4. Crear una instancia del contexto BloggingContext
-using var context = new AppDbContext(options);
+var context = new AppDbContext(options);
 
 //5. Llamar al metodo que verifica la existencia de la base de datos y crea la base de datos si no existe
 DatabaseConUtils.EnsureDatabaseCreated(context);
 Console.ReadKey();
 
 //6. Crear una instancia del servicio de cliente
+var proveedorService = new ProveedorService(new ProveedorRepository(context));
+var categoriaService = new CategoriaService(new CategoriaRepository(context));
+
 var uiMenu = new MenuConsoleUI(
     new ClienteConsoleUI(new ClienteService(new ClienteRepository(context))),
     new SucursalConsoleUI(new SucursalService(new SucursalRepository(context))),
-    new ProveedorConsoleUI(new ProveedorService(new ProveedorRepository(context)))
+    new ProveedorConsoleUI(proveedorService),
+    new CategoriaConsoleUI(categoriaService),
+    new ProductoConsoleUI(new ProductoService(new ProductoRepository(context)), categoriaService, proveedorService)
 );
 
 uiMenu.MostrarMenu();

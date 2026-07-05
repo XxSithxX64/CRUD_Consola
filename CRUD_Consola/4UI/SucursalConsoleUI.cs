@@ -1,13 +1,13 @@
-﻿using CRUD_Consola._3Application.Services;
+﻿using CRUD_Consola._3Application.Services.Interfaces;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
     internal class SucursalConsoleUI
     {
-        private readonly SucursalService _sucursalService;
+        private readonly ISucursalService _sucursalService;
 
-        public SucursalConsoleUI(SucursalService sucursalService)
+        public SucursalConsoleUI(ISucursalService sucursalService)
         {
             _sucursalService = sucursalService;
         }
@@ -48,6 +48,7 @@ namespace CRUD_Consola._4UI
             var sucursal = CapturarDatosSucursal();
             _sucursalService.CrearSucursal(sucursal);
             Console.WriteLine("✅ Sucursal registrada correctamente.");
+            Console.WriteLine();
         }
 
         private void ListarSucursalesUI()
@@ -71,6 +72,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine(sucursal.ToString());
             else
                 Console.WriteLine("❌ Sucursal no encontrada.");
+            Console.WriteLine();
         }
 
         private void ActualizarSucursalUI()
@@ -78,7 +80,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Actualizar Sucursal:");
             Console.WriteLine("--------------------");
             Console.Write("Ingrese el ID de la sucursal a actualizar: ");
-            var id = int.Parse(Console.ReadLine());
+            var id = Convert.ToInt32(Console.ReadLine());
             var sucursal = _sucursalService.BuscarSucursal(id);
 
             if (sucursal == null)
@@ -87,9 +89,9 @@ namespace CRUD_Consola._4UI
                 return;
             }
 
-            Console.WriteLine("ngrese nuevos datos (dejar vacío para mantener el actual):");
+            Console.WriteLine("Ingrese nuevos datos (dejar vacío para mantener el actual):");
 
-            Console.Write($"Nombres ({sucursal.Nombre}): ");
+            Console.Write($"Nombre ({sucursal.Nombre}): ");
             var nombre = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(nombre)) sucursal.Nombre = nombre;
 
@@ -99,6 +101,7 @@ namespace CRUD_Consola._4UI
 
             _sucursalService.ActualizarSucursal(sucursal);
             Console.WriteLine("✅ Sucursal actualizada correctamente.");
+            Console.WriteLine();
         }
 
         private void EliminarSucursalUI()
@@ -106,7 +109,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Eliminar Sucursal:");
             Console.WriteLine("------------------");
             Console.Write("Ingrese el ID de la sucursal a eliminar: ");
-            var id = int.Parse(Console.ReadLine());
+            var id = Convert.ToInt32(Console.ReadLine());
             var sucursal = _sucursalService.BuscarSucursal(id);
             if (sucursal == null)
             {

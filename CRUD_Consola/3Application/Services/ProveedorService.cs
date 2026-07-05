@@ -1,9 +1,10 @@
-﻿using CRUD_Consola.Core.Entities;
+﻿using CRUD_Consola._3Application.Services.Interfaces;
+using CRUD_Consola.Core.Entities;
 using CRUD_Consola.Core.Interfaces;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class ProveedorService
+    internal class ProveedorService : IProveedorService
     {
         private readonly IProveedorRepository repo;
 

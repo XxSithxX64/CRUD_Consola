@@ -7,5 +7,10 @@
         public string Descripcion { get; set; } = string.Empty;
 
         public ICollection<Producto> Productos { get; set; } = new List<Producto>();
+
+        public override string ToString()
+        {
+            return $"{CategoriaId}, {Nombre}, {Descripcion}";
+        }
     }
 }

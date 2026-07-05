@@ -1,13 +1,13 @@
-﻿using CRUD_Consola.Application.Services;
+﻿using CRUD_Consola._3.Application.Services.Interfaces;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola.UI
 {
     internal class ClienteConsoleUI
     {
-        private readonly ClienteService _clienteService;
+        private readonly IClienteService _clienteService;
 
-        public ClienteConsoleUI(ClienteService clienteService)
+        public ClienteConsoleUI(IClienteService clienteService)
         {
             _clienteService = clienteService;
         }
@@ -49,6 +49,7 @@ namespace CRUD_Consola.UI
             var cliente = CapturarDatosCliente();
             _clienteService.CrearCliente(cliente);
             Console.WriteLine("✅ Cliente registrado correctamente.");
+            Console.WriteLine();
         }
 
         private void ListarClientesUI()
@@ -73,6 +74,7 @@ namespace CRUD_Consola.UI
                 Console.WriteLine(cliente.ToString());
             else
                 Console.WriteLine("❌ Cliente no encontrado.");
+            Console.WriteLine();
         }
 
         private void ActualizarClienteUI()
@@ -126,6 +128,7 @@ namespace CRUD_Consola.UI
 
             _clienteService.ActualizarCliente(cliente);
             Console.WriteLine("✅ Cliente actualizado correctamente.");
+            Console.WriteLine();
         }
 
         private void EliminarClienteUI()
@@ -136,6 +139,7 @@ namespace CRUD_Consola.UI
             int id = int.Parse(Console.ReadLine());
             _clienteService.EliminarCliente(id);
             Console.WriteLine("✅ Cliente eliminado correctamente.");
+            Console.WriteLine();
         }
 
         private Cliente CapturarDatosCliente()
