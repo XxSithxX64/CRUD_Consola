@@ -6,11 +6,13 @@ namespace CRUD_Consola._4UI
     {
         private readonly ClienteConsoleUI _clienteConsoleUI;
         private readonly SucursalConsoleUI _sucursalConsoleUI;
+        private readonly ProveedorConsoleUI _proveedorConsoleUI;
 
-        public MenuConsoleUI(ClienteConsoleUI clienteConsoleUI, SucursalConsoleUI sucursalConsoleUI)
+        public MenuConsoleUI(ClienteConsoleUI clienteConsoleUI, SucursalConsoleUI sucursalConsoleUI, ProveedorConsoleUI proveedorConsoleUI)
         {
             _clienteConsoleUI = clienteConsoleUI;
             _sucursalConsoleUI = sucursalConsoleUI;
+            _proveedorConsoleUI = proveedorConsoleUI;
         }
 
         public void MostrarMenu()
@@ -22,6 +24,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("=== MENÚ PRINCIPAL ===");
                 Console.WriteLine("1. CRUD Clientes");
                 Console.WriteLine("2. CRUD Sucursales");
+                Console.WriteLine("3. CRUD Proveedores");
                 Console.WriteLine("0. Salir");
                 Console.Write("Opción: ");
                 var opcion = Console.ReadLine();
@@ -35,6 +38,10 @@ namespace CRUD_Consola._4UI
                     case "2":
                         Console.Clear();
                         _sucursalConsoleUI.MostrarMenu();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        _proveedorConsoleUI.MostrarMenu();
                         break;
                     case "0":
                         salir = true;

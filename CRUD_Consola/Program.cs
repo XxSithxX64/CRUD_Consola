@@ -33,15 +33,10 @@ DatabaseConUtils.EnsureDatabaseCreated(context);
 Console.ReadKey();
 
 //6. Crear una instancia del servicio de cliente
-var clienteService = new ClienteService(new ClienteRepository(context));
-
-//7 Ahora delegas la UI a la clase
-//var uiCliente = new ClienteConsoleUI(clienteService);
-//uiCliente.MostrarMenu();
-
 var uiMenu = new MenuConsoleUI(
-    new ClienteConsoleUI(clienteService),
-    new SucursalConsoleUI(new SucursalService(new SucursalRepository(context)))
+    new ClienteConsoleUI(new ClienteService(new ClienteRepository(context))),
+    new SucursalConsoleUI(new SucursalService(new SucursalRepository(context))),
+    new ProveedorConsoleUI(new ProveedorService(new ProveedorRepository(context)))
 );
 
 uiMenu.MostrarMenu();

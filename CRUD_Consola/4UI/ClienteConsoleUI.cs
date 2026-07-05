@@ -17,7 +17,7 @@ namespace CRUD_Consola.UI
             bool salir = false;
             while (!salir)
             {
-                Console.WriteLine("\n=== CRUD Clientes ===");
+                Console.WriteLine("=== CRUD Clientes ===");
                 Console.WriteLine("1. Crear Cliente");
                 Console.WriteLine("2. Listar Clientes");
                 Console.WriteLine("3. Buscar Cliente por ID");
@@ -59,6 +59,7 @@ namespace CRUD_Consola.UI
             foreach (var c in clientes)
                 //Console.WriteLine($"{c.PersonaId} - {c.Nombres} {c.ApellidoPat} {c.ApellidoMat} ({c.Email})");
                 Console.WriteLine(c.ToString());
+            Console.WriteLine();
         }
 
         private void BuscarClienteUI()

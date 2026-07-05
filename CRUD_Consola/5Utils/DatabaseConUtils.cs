@@ -1,6 +1,5 @@
 ﻿using CRUD_Consola.Infrastructure.Data;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola.Utils
 {

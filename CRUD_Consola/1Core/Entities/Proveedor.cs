@@ -8,5 +8,10 @@
         public string Telefono { get; set; } = string.Empty;
 
         public ICollection<Producto> Productos { get; set; } = new List<Producto>();
+
+        public override string ToString()
+        {
+            return $"{ProveedorId}, {Nombre}, {Contacto}, {Telefono}";
+        }
     }
 }

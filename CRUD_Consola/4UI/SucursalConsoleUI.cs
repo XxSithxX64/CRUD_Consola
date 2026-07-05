@@ -17,7 +17,7 @@ namespace CRUD_Consola._4UI
             bool salir = false;
             while (!salir)
             {
-                Console.WriteLine("\n=== CRUD Sucursales ===");
+                Console.WriteLine("=== CRUD Sucursales ===");
                 Console.WriteLine("1. Crear Sucursal");
                 Console.WriteLine("2. Listar Sucursales");
                 Console.WriteLine("3. Buscar Sucursal por ID");
@@ -57,6 +57,7 @@ namespace CRUD_Consola._4UI
             var sucursales = _sucursalService.ListarSucursales();
             foreach (var s in sucursales)
                 Console.WriteLine(s.ToString());
+            Console.WriteLine();
         }
 
         private void BuscarSucursalUI()
@@ -92,7 +93,7 @@ namespace CRUD_Consola._4UI
             var nombre = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(nombre)) sucursal.Nombre = nombre;
 
-            Console.WriteLine("Dirección ({sucursal.Direccion}): ");
+            Console.WriteLine("$Dirección ({sucursal.Direccion}): ");
             var direccion = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(direccion)) sucursal.Direccion = direccion;
 
