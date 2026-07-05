@@ -1,15 +1,16 @@
 ﻿using CRUD_Consola._3Application.Services.Interfaces;
+using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
     internal class SucursalConsoleUI
     {
-        private readonly ISucursalService _sucursalService;
+        private readonly IUnitOfWork _uow;
 
-        public SucursalConsoleUI(ISucursalService sucursalService)
+        public SucursalConsoleUI(IUnitOfWork uow)
         {
-            _sucursalService = sucursalService;
+            _uow = uow;
         }
 
         public void MostrarMenu()
@@ -46,7 +47,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Ingrese los datos de la sucursal:");
             Console.WriteLine("---------------------------------");
             var sucursal = CapturarDatosSucursal();
-            _sucursalService.CrearSucursal(sucursal);
+            _uow.SucursalService.CrearSucursal(sucursal);
             Console.WriteLine("✅ Sucursal registrada correctamente.");
             Console.WriteLine();
         }
@@ -55,7 +56,7 @@ namespace CRUD_Consola._4UI
         {
             Console.WriteLine("Lista de Sucursales:");
             Console.WriteLine("--------------------");
-            var sucursales = _sucursalService.ListarSucursales();
+            var sucursales = _uow.SucursalService.ListarSucursales();
             foreach (var s in sucursales)
                 Console.WriteLine(s.ToString());
             Console.WriteLine();
@@ -67,7 +68,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("-----------------------");
             Console.Write("Ingrese el ID de la sucursal: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var sucursal = _sucursalService.BuscarSucursal(id);
+            var sucursal = _uow.SucursalService.BuscarSucursal(id);
             if (sucursal != null)
                 Console.WriteLine(sucursal.ToString());
             else
@@ -81,7 +82,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("--------------------");
             Console.Write("Ingrese el ID de la sucursal a actualizar: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var sucursal = _sucursalService.BuscarSucursal(id);
+            var sucursal = _uow.SucursalService.BuscarSucursal(id);
 
             if (sucursal == null)
             {
@@ -99,7 +100,7 @@ namespace CRUD_Consola._4UI
             var direccion = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(direccion)) sucursal.Direccion = direccion;
 
-            _sucursalService.ActualizarSucursal(sucursal);
+            _uow.SucursalService.ActualizarSucursal(sucursal);
             Console.WriteLine("✅ Sucursal actualizada correctamente.");
             Console.WriteLine();
         }
@@ -110,13 +111,13 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("------------------");
             Console.Write("Ingrese el ID de la sucursal a eliminar: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var sucursal = _sucursalService.BuscarSucursal(id);
+            var sucursal = _uow.SucursalService.BuscarSucursal(id);
             if (sucursal == null)
             {
                 Console.WriteLine("❌ Sucursal no encontrada.");
                 return;
             }
-            _sucursalService.EliminarSucursal(id);
+            _uow.SucursalService.EliminarSucursal(id);
             Console.WriteLine("✅ Sucursal eliminada correctamente.");
         }
 

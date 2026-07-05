@@ -1,10 +1,6 @@
-﻿using CRUD_Consola._2.Infrastructure.Repositories;
-using CRUD_Consola._2Infrastructure.Repositories;
-using CRUD_Consola._3Application.Services;
+﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola._4UI;
-using CRUD_Consola.Application.Services;
 using CRUD_Consola.Infrastructure.Data;
-using CRUD_Consola.UI;
 using CRUD_Consola.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,16 +28,9 @@ var context = new AppDbContext(options);
 DatabaseConUtils.EnsureDatabaseCreated(context);
 Console.ReadKey();
 
-//6. Crear una instancia del servicio de cliente
-var proveedorService = new ProveedorService(new ProveedorRepository(context));
-var categoriaService = new CategoriaService(new CategoriaRepository(context));
+//6. Crear una instancia de UnitOfWork y pasarle el contexto
+var uow = new UnitOfWork(context);
 
-var uiMenu = new MenuConsoleUI(
-    new ClienteConsoleUI(new ClienteService(new ClienteRepository(context))),
-    new SucursalConsoleUI(new SucursalService(new SucursalRepository(context))),
-    new ProveedorConsoleUI(proveedorService),
-    new CategoriaConsoleUI(categoriaService),
-    new ProductoConsoleUI(new ProductoService(new ProductoRepository(context)), categoriaService, proveedorService)
-);
-
+//7. Crear una instancia de MenuConsoleUI y pasarle la instancia de UnitOfWork
+var uiMenu = new MenuConsoleUI(uow);
 uiMenu.MostrarMenu();

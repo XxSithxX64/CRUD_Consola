@@ -1,4 +1,5 @@
-﻿using CRUD_Consola.UI;
+﻿using CRUD_Consola._3Application.UnitOfWork;
+using CRUD_Consola.UI;
 
 namespace CRUD_Consola._4UI
 {
@@ -10,18 +11,13 @@ namespace CRUD_Consola._4UI
         private readonly CategoriaConsoleUI _categoriaConsoleUI;
         private readonly ProductoConsoleUI _productoConsoleUI;
 
-        public MenuConsoleUI(ClienteConsoleUI clienteConsoleUI, 
-                             SucursalConsoleUI sucursalConsoleUI, 
-                             ProveedorConsoleUI proveedorConsoleUI, 
-                             CategoriaConsoleUI categoriaConsoleUI, 
-                             ProductoConsoleUI productoConsoleUI
-                             )
+        public MenuConsoleUI(IUnitOfWork uow)
         {
-            _clienteConsoleUI = clienteConsoleUI;
-            _sucursalConsoleUI = sucursalConsoleUI;
-            _proveedorConsoleUI = proveedorConsoleUI;
-            _categoriaConsoleUI = categoriaConsoleUI;
-            _productoConsoleUI = productoConsoleUI;
+            _clienteConsoleUI = new ClienteConsoleUI(uow);
+            _sucursalConsoleUI = new SucursalConsoleUI(uow);
+            _proveedorConsoleUI = new ProveedorConsoleUI(uow);
+            _categoriaConsoleUI = new CategoriaConsoleUI(uow);
+            _productoConsoleUI = new ProductoConsoleUI(uow);
         }
 
         public void MostrarMenu()
