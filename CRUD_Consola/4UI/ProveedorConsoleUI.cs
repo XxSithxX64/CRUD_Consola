@@ -47,6 +47,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("--------------------------------");
             var proveedor = CapturarDatosProveedor();
             _uow.ProveedorService.Crear(proveedor);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Proveedor registrado correctamente.");
             Console.WriteLine();
         }
@@ -103,6 +104,7 @@ namespace CRUD_Consola._4UI
             if (!string.IsNullOrWhiteSpace(telefono)) proveedor.Telefono = telefono;
 
             _uow.ProveedorService.Actualizar(proveedor);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Proveedor actualizado correctamente.");
             Console.WriteLine();
         }
@@ -120,6 +122,7 @@ namespace CRUD_Consola._4UI
                 return;
             }
             _uow.ProveedorService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Proveedor eliminado correctamente.");
             Console.WriteLine();
         }

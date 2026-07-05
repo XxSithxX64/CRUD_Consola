@@ -50,6 +50,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("-------------------------------");
             var producto = CapturarDatosProducto();
             _uow.ProductoService.Crear(producto);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Producto registrado correctamente.");
             Console.WriteLine();
         }
@@ -130,6 +131,7 @@ namespace CRUD_Consola._4UI
             if(!string.IsNullOrWhiteSpace(proveedorId.ToString())) producto.ProveedorId = proveedorId;
 
             _uow.ProductoService.Actualizar(producto);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Producto actualizado correctamente.");
             Console.WriteLine();
         }
@@ -148,6 +150,7 @@ namespace CRUD_Consola._4UI
                 return;
             }
             _uow.ProductoService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Producto eliminado correctamente.");
         }
 

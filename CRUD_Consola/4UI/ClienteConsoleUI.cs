@@ -48,6 +48,7 @@ namespace CRUD_Consola.UI
             Console.WriteLine("------------------------------");
             var cliente = CapturarDatosCliente();
             _uow.ClienteService.Crear(cliente);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Cliente registrado correctamente.");
             Console.WriteLine();
         }
@@ -127,6 +128,7 @@ namespace CRUD_Consola.UI
                 cliente.Activo = activo.Trim().ToLower() == "s" || activo.Trim().ToLower() == "true";
 
             _uow.ClienteService.Actualizar(cliente);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Cliente actualizado correctamente.");
             Console.WriteLine();
         }
@@ -138,6 +140,7 @@ namespace CRUD_Consola.UI
             Console.Write("Ingrese ID del cliente a eliminar: ");
             int id = int.Parse(Console.ReadLine());
             _uow.ClienteService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Cliente eliminado correctamente.");
             Console.WriteLine();
         }

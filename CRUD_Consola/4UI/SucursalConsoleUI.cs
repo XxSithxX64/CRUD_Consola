@@ -47,6 +47,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("---------------------------------");
             var sucursal = CapturarDatosSucursal();
             _uow.SucursalService.Crear(sucursal);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Sucursal registrada correctamente.");
             Console.WriteLine();
         }
@@ -100,6 +101,7 @@ namespace CRUD_Consola._4UI
             if (!string.IsNullOrWhiteSpace(direccion)) sucursal.Direccion = direccion;
 
             _uow.SucursalService.Actualizar(sucursal);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Sucursal actualizada correctamente.");
             Console.WriteLine();
         }
@@ -117,6 +119,7 @@ namespace CRUD_Consola._4UI
                 return;
             }
             _uow.SucursalService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Sucursal eliminada correctamente.");
         }
 

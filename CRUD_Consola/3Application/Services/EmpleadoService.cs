@@ -12,6 +12,9 @@ namespace CRUD_Consola._3Application.Services
             this.empleadoRepository = empleadoRepository;
         }
 
-        // Implement any additional methods specific to EmpleadoService here
+        public IEnumerable<Empleado> ObtenerSucursalDetallados()
+        {
+            return empleadoRepository.ListarConRelaciones();
+        }
     }
 }

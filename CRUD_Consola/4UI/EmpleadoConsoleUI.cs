@@ -23,6 +23,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("3. Buscar Empleado por ID");
                 Console.WriteLine("4. Actualizar Empleado");
                 Console.WriteLine("5. Eliminar Empleado");
+                Console.WriteLine("6. Listar Empleados Detallados (con Sucursal)");
                 Console.WriteLine("0. Salir");
                 Console.WriteLine();
                 Console.Write("Opción: ");
@@ -35,6 +36,7 @@ namespace CRUD_Consola._4UI
                     case "3": Console.Clear(); BuscarEmpleadoUI(); break;
                     case "4": Console.Clear(); ActualizarEmpleadoUI(); break;
                     case "5": Console.Clear(); EliminarEmpleadoUI(); break;
+                    case "6": Console.Clear(); ListarEmpleadosDetalladosUI(); break;
                     case "0": salir = true; break;
                     default: Console.Clear(); Console.WriteLine("❌ Opción inválida."); break;
                 }
@@ -47,6 +49,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("------------------------------");
             var empleado = CapturarDatosEmpleado();
             _uow.IEmpleadoService.Crear(empleado);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Empleado registrado correctamente.");
             Console.WriteLine();
         }
@@ -122,6 +125,7 @@ namespace CRUD_Consola._4UI
             if (!string.IsNullOrWhiteSpace(cargo)) empleado.Cargo = cargo;
 
             _uow.IEmpleadoService.Actualizar(empleado);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Empleado actualizado correctamente.");
             Console.ReadLine();
         }
@@ -133,10 +137,24 @@ namespace CRUD_Consola._4UI
             Console.Write("Ingrese el ID del empleado a eliminar: ");
             int id = int.Parse(Console.ReadLine());
             _uow.IEmpleadoService.Eliminar(id);
+            _uow.SaveChanges();
             Console.WriteLine("✅ Empleado eliminado correctamente.");
             Console.WriteLine();
         }
 
+        private void ListarEmpleadosDetalladosUI()
+        {
+            Console.WriteLine("Lista de Empleados Detallados (con Sucursal):");
+            Console.WriteLine("---------------------------------------------");
+            var empleados = _uow.IEmpleadoService.ObtenerSucursalDetallados();
+            foreach (var e in empleados)
+                Console.WriteLine($"{e.PersonaId} {e.Nombres} {e.ApellidoPat} {e.ApellidoMat} - " +
+                                  $"Cargo: {e.Cargo}, Contratado: {e.FechaContratacion:dd/MM/yyyy}, " +
+                                  $"DNI: {e.DocIdentidad}, Nac: {e.FechaNacimiento:dd/MM/yyyy}, " +
+                                  $"Email: {e.Email}, Tel: {e.Telefono}, Dir: {e.Direccion}, " +
+                                  $"{e.SucursalId}, {e.Sucursal.Nombre}, {e.Sucursal.Direccion}");
+            Console.WriteLine();
+        }
         private Empleado CapturarDatosEmpleado()
         {
             var empleado = new Empleado();

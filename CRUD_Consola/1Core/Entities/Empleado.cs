@@ -5,6 +5,9 @@
         public string Cargo { get; set; } = string.Empty;
         public DateTime FechaContratacion { get; set; }
 
+        public int SucursalId { get; set; }
+        public Sucursal Sucursal { get; set; }
+
         // Relación con pedidos registrados
         public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
 
@@ -13,7 +16,7 @@
             return $"{PersonaId} {Nombres} {ApellidoPat} {ApellidoMat} - " +
                    $"Cargo: {Cargo}, Contratado: {FechaContratacion:dd/MM/yyyy}, " +
                    $"DNI: {DocIdentidad}, Nac: {FechaNacimiento:dd/MM/yyyy}, " +
-                   $"Email: {Email}, Tel: {Telefono}, Dir: {Direccion}";
+                   $"Email: {Email}, Tel: {Telefono}, Dir: {Direccion}, {SucursalId}";
         }
     }
 }
