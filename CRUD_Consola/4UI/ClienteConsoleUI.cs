@@ -24,24 +24,28 @@ namespace CRUD_Consola.UI
                 Console.WriteLine("4. Actualizar Cliente");
                 Console.WriteLine("5. Eliminar Cliente");
                 Console.WriteLine("0. Salir");
+                Console.WriteLine();
                 Console.Write("Opción: ");
                 var opcion = Console.ReadLine();
+                Console.WriteLine();
 
                 switch (opcion)
                 {
-                    case "1": CrearClienteUI(); break;
-                    case "2": ListarClientesUI(); break;
-                    case "3": BuscarClienteUI(); break;
-                    case "4": ActualizarClienteUI(); break;
-                    case "5": EliminarClienteUI(); break;
+                    case "1": Console.Clear(); CrearClienteUI(); break;
+                    case "2": Console.Clear(); ListarClientesUI(); break;
+                    case "3": Console.Clear(); BuscarClienteUI(); break;
+                    case "4": Console.Clear(); ActualizarClienteUI(); break;
+                    case "5": Console.Clear(); EliminarClienteUI(); break;
                     case "0": salir = true; break;
-                    default: Console.WriteLine("❌ Opción inválida."); break;
+                    default: Console.Clear(); Console.WriteLine("❌ Opción inválida."); break;
                 }
             }
         }
 
         private void CrearClienteUI()
         {
+            Console.WriteLine("Ingrese los datos del cliente:");
+            Console.WriteLine("------------------------------");
             var cliente = CapturarDatosCliente();
             _clienteService.CrearCliente(cliente);
             Console.WriteLine("✅ Cliente registrado correctamente.");
@@ -49,24 +53,31 @@ namespace CRUD_Consola.UI
 
         private void ListarClientesUI()
         {
+            Console.WriteLine("Lista de Clientes:");
+            Console.WriteLine("------------------");
             var clientes = _clienteService.ListarClientes();
             foreach (var c in clientes)
-                Console.WriteLine($"{c.PersonaId} - {c.Nombres} {c.ApellidoPat} {c.ApellidoMat} ({c.Email})");
+                //Console.WriteLine($"{c.PersonaId} - {c.Nombres} {c.ApellidoPat} {c.ApellidoMat} ({c.Email})");
+                Console.WriteLine(c.ToString());
         }
 
         private void BuscarClienteUI()
         {
+            Console.WriteLine("Buscar Cliente por ID:");
+            Console.WriteLine("----------------------");
             Console.Write("Ingrese ID del cliente: ");
             int id = int.Parse(Console.ReadLine());
             var cliente = _clienteService.BuscarCliente(id);
             if (cliente != null)
-                Console.WriteLine($"{cliente.PersonaId} - {cliente.Nombres} {cliente.ApellidoPat} {cliente.ApellidoMat} ({cliente.Email})");
+                Console.WriteLine(cliente.ToString());
             else
                 Console.WriteLine("❌ Cliente no encontrado.");
         }
 
         private void ActualizarClienteUI()
         {
+            Console.WriteLine("Actualizar Cliente:");
+            Console.WriteLine("-------------------");
             Console.Write("Ingrese ID del cliente a actualizar: ");
             int id = int.Parse(Console.ReadLine());
             var cliente = _clienteService.BuscarCliente(id);
@@ -91,9 +102,26 @@ namespace CRUD_Consola.UI
             var apellidoMat = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(apellidoMat)) cliente.ApellidoMat = apellidoMat;
 
+            Console.Write($"Documento de Identidad ({cliente.DocIdentidad}): ");
+            var docIdentidad = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(docIdentidad)) cliente.DocIdentidad = docIdentidad;
+
             Console.Write($"Email ({cliente.Email}): ");
             var email = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(email)) cliente.Email = email;
+
+            Console.Write($"Telefono ({cliente.Telefono}): ");
+            var telefono = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(telefono)) cliente.Telefono = telefono;
+
+            Console.Write($"Direccion ({cliente.Direccion}): ");
+            var direccion = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(direccion)) cliente.Direccion = direccion;
+
+            Console.Write($"Activo ({cliente.Activo})(s/n): ");
+            var activo = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(activo))
+                cliente.Activo = activo.Trim().ToLower() == "s" || activo.Trim().ToLower() == "true";
 
             _clienteService.ActualizarCliente(cliente);
             Console.WriteLine("✅ Cliente actualizado correctamente.");
@@ -101,6 +129,8 @@ namespace CRUD_Consola.UI
 
         private void EliminarClienteUI()
         {
+            Console.WriteLine("Eliminar Cliente:");
+            Console.WriteLine("-----------------");
             Console.Write("Ingrese ID del cliente a eliminar: ");
             int id = int.Parse(Console.ReadLine());
             _clienteService.EliminarCliente(id);

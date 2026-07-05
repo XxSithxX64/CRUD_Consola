@@ -7,5 +7,10 @@
         public string Direccion { get; set; } = string.Empty;
 
         public ICollection<Empleado> Empleados { get; set; } = new List<Empleado>();
+
+        public override string ToString()
+        {
+            return $"{SucursalId}, {Nombre}, {Direccion}";
+        }
     }
 }

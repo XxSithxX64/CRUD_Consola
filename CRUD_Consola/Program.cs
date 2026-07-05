@@ -1,4 +1,7 @@
 ﻿using CRUD_Consola._2.Infrastructure.Repositories;
+using CRUD_Consola._2Infrastructure.Repositories;
+using CRUD_Consola._3Application.Services;
+using CRUD_Consola._4UI;
 using CRUD_Consola.Application.Services;
 using CRUD_Consola.Infrastructure.Data;
 using CRUD_Consola.UI;
@@ -27,10 +30,18 @@ using var context = new AppDbContext(options);
 
 //5. Llamar al metodo que verifica la existencia de la base de datos y crea la base de datos si no existe
 DatabaseConUtils.EnsureDatabaseCreated(context);
+Console.ReadKey();
 
 //6. Crear una instancia del servicio de cliente
 var clienteService = new ClienteService(new ClienteRepository(context));
 
 //7 Ahora delegas la UI a la clase
-var uiCliente = new ClienteConsoleUI(clienteService);
-uiCliente.MostrarMenu();
+//var uiCliente = new ClienteConsoleUI(clienteService);
+//uiCliente.MostrarMenu();
+
+var uiMenu = new MenuConsoleUI(
+    new ClienteConsoleUI(clienteService),
+    new SucursalConsoleUI(new SucursalService(new SucursalRepository(context)))
+);
+
+uiMenu.MostrarMenu();
