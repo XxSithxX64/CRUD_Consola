@@ -3,7 +3,7 @@ using CRUD_Consola.UI;
 
 namespace CRUD_Consola._4UI
 {
-    internal class MenuConsoleUI
+    public class MenuConsoleUI
     {
         private readonly ClienteConsoleUI _clienteConsoleUI;
         private readonly SucursalConsoleUI _sucursalConsoleUI;

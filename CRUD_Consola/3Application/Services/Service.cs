@@ -3,7 +3,7 @@ using CRUD_Consola._1Core.IService;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class Service<T> : IService<T> where T : class
+    public class Service<T> : IService<T> where T : class
     {
         private readonly IRepository<T> repository;
 

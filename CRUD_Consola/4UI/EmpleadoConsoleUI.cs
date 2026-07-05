@@ -3,7 +3,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
-    internal class EmpleadoConsoleUI
+    public class EmpleadoConsoleUI
     {
         private readonly IUnitOfWork _uow;
 
@@ -48,7 +48,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Ingrese los datos del empleado:");
             Console.WriteLine("------------------------------");
             var empleado = CapturarDatosEmpleado();
-            _uow.IEmpleadoService.Crear(empleado);
+            _uow.EmpleadoService.Crear(empleado);
             _uow.SaveChanges();
             Console.WriteLine("✅ Empleado registrado correctamente.");
             Console.WriteLine();
@@ -58,7 +58,7 @@ namespace CRUD_Consola._4UI
         {
             Console.WriteLine("Lista de Empleados:");
             Console.WriteLine("-------------------");
-            var empleados = _uow.IEmpleadoService.Listar();
+            var empleados = _uow.EmpleadoService.Listar();
             foreach (var e in empleados)
                 Console.WriteLine(e.ToString());
             Console.WriteLine();
@@ -70,7 +70,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("-----------------------");
             Console.Write("Ingrese el ID del empleado: ");
             int id = int.Parse(Console.ReadLine());
-            var empleado = _uow.IEmpleadoService.Buscar(id);
+            var empleado = _uow.EmpleadoService.Buscar(id);
             if (empleado != null)
                 Console.WriteLine(empleado.ToString());
             else
@@ -84,7 +84,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("--------------------");
             Console.Write("Ingrese el ID del empleado a actualizar: ");
             int id = int.Parse(Console.ReadLine());
-            var empleado = _uow.IEmpleadoService.Buscar(id);
+            var empleado = _uow.EmpleadoService.Buscar(id);
             if (empleado == null)
             {
                 Console.WriteLine("❌ Empleado no encontrado.");
@@ -124,7 +124,7 @@ namespace CRUD_Consola._4UI
             var cargo = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(cargo)) empleado.Cargo = cargo;
 
-            _uow.IEmpleadoService.Actualizar(empleado);
+            _uow.EmpleadoService.Actualizar(empleado);
             _uow.SaveChanges();
             Console.WriteLine("✅ Empleado actualizado correctamente.");
             Console.ReadLine();
@@ -136,7 +136,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("------------------");
             Console.Write("Ingrese el ID del empleado a eliminar: ");
             int id = int.Parse(Console.ReadLine());
-            _uow.IEmpleadoService.Eliminar(id);
+            _uow.EmpleadoService.Eliminar(id);
             _uow.SaveChanges();
             Console.WriteLine("✅ Empleado eliminado correctamente.");
             Console.WriteLine();
@@ -146,7 +146,7 @@ namespace CRUD_Consola._4UI
         {
             Console.WriteLine("Lista de Empleados Detallados (con Sucursal):");
             Console.WriteLine("---------------------------------------------");
-            var empleados = _uow.IEmpleadoService.ObtenerSucursalDetallados();
+            var empleados = _uow.EmpleadoService.ObtenerSucursalDetallados();
             foreach (var e in empleados)
                 Console.WriteLine($"{e.PersonaId} {e.Nombres} {e.ApellidoPat} {e.ApellidoMat} - " +
                                   $"Cargo: {e.Cargo}, Contratado: {e.FechaContratacion:dd/MM/yyyy}, " +

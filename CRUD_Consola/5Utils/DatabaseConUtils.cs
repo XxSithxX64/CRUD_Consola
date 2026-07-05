@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace CRUD_Consola.Utils
 {
-    internal class DatabaseConUtils
+    public class DatabaseConUtils
     {
         public static void EnsureDatabaseCreated(AppDbContext context)
         {

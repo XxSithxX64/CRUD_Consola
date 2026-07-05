@@ -4,7 +4,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class EmpleadoService : Service<Empleado>, IEmpleadoService
+    public class EmpleadoService : Service<Empleado>, IEmpleadoService
     {
         private readonly IEmpleadoRepository empleadoRepository;
         public EmpleadoService(IEmpleadoRepository empleadoRepository) : base(empleadoRepository)

@@ -3,7 +3,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
-    internal class SucursalConsoleUI
+    public class SucursalConsoleUI
     {
         private readonly IUnitOfWork _uow;
 

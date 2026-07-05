@@ -1,6 +1,6 @@
 ﻿namespace CRUD_Consola._1Core.IRepository
 {
-    internal interface IRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

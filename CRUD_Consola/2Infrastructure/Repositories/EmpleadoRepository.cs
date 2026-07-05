@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola._2Infrastructure.Repositories
 {
-    internal class EmpleadoRepository : Repository<Empleado>, IEmpleadoRepository
+    public class EmpleadoRepository : Repository<Empleado>, IEmpleadoRepository
     {
         public EmpleadoRepository(AppDbContext context) : base(context)
         {

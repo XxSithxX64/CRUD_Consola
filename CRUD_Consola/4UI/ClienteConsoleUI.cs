@@ -3,7 +3,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola.UI
 {
-    internal class ClienteConsoleUI
+    public class ClienteConsoleUI
     {
         private readonly IUnitOfWork _uow;
 

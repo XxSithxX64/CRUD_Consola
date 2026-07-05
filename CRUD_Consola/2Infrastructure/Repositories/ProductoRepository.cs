@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola._2Infrastructure.Repositories
 {
-    internal class ProductoRepository : Repository<Producto>, IProductoRepository
+    public class ProductoRepository : Repository<Producto>, IProductoRepository
     {
         public ProductoRepository(AppDbContext context) : base(context)
         {

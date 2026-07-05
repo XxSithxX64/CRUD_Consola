@@ -2,7 +2,7 @@
 
 namespace CRUD_Consola._1Core.IRepository
 {
-    internal interface IEmpleadoRepository : IRepository<Empleado>
+    public interface IEmpleadoRepository : IRepository<Empleado>
     {
         IEnumerable<Empleado> ListarConRelaciones();
     }

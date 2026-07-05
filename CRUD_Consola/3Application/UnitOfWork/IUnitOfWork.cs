@@ -10,7 +10,8 @@ namespace CRUD_Consola._3Application.UnitOfWork
         IService<Proveedor>ProveedorService { get; }
         IService<Categoria> CategoriaService { get; }
         IProductoService ProductoService { get; }
-        IEmpleadoService IEmpleadoService { get; }
+        IEmpleadoService EmpleadoService { get; }
+        IPedidoService PedidoService { get; }
         void SaveChanges();
     }
 }
