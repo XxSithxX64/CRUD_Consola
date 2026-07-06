@@ -18,6 +18,7 @@ namespace CRUD_Consola._3Application.UnitOfWork
         private IProductoService? _productoService;
         private IEmpleadoService? _empleadoService;
         private IPedidoService? _pedidoService;
+        private IDetallePedidoService? _detallePedidoService;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -49,6 +50,9 @@ namespace CRUD_Consola._3Application.UnitOfWork
 
         public IPedidoService PedidoService => 
             _pedidoService ??= new PedidoService(new PedidoRepository(context));
+
+        public IDetallePedidoService DetallePedidoService =>
+            _detallePedidoService ??= new DetallePedidoService(new DetallePedidoRepository(context));
 
         public void SaveChanges()
         {
