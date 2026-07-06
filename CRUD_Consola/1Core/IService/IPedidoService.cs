@@ -4,6 +4,16 @@ namespace CRUD_Consola._1Core.IService
 {
     public interface IPedidoService : IService<Pedido>
     {
-        IEnumerable<Pedido> ObtenerPedidosDetallados();
+        IEnumerable<Pedido> GetPedidosConClienteYEmpleado();
+        IEnumerable<Pedido> GetPedidosPorCliente(int clienteId);
+        IEnumerable<Pedido> GetPedidosPorEmpleado(int empleadoId);
+        IEnumerable<Pedido> GetPedidosPorSucursal(int sucursalId);
+        IEnumerable<Pedido> GetPedidosPorFecha(DateTime inicio, DateTime fin);
+        Pedido GetPedidoCompleto(int pedidoId);
+        decimal CalcularTotalPedido(int pedidoId);
+        bool VerificarStock(int pedidoId);
+        void ActualizarStockDespuesDePedido(int pedidoId);
+        IEnumerable<object> GetResumenVentasPorCategoria();
+        Factura GenerarFacturaDesdePedido(int pedidoId);
     }
 }

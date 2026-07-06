@@ -25,6 +25,16 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("4. Actualizar Pedido (No disponible)");
                 Console.WriteLine("5. Eliminar Pedido");
                 Console.WriteLine("6. Listar Pedidos Detallados (con Cliente y Producto)");
+                Console.WriteLine("7. Listar Pedidos por Cliente");
+                Console.WriteLine("8. Listar Pedidos por Empleado");
+                Console.WriteLine("9. Listar Pedidos por Sucursal");
+                Console.WriteLine("10. Listar Pedidos por Fecha");
+                Console.WriteLine("11. Mostrar Pedido Completo");
+                Console.WriteLine("12. Calcular Total Pedido");
+                Console.WriteLine("13. Verificar Stock");
+                Console.WriteLine("14. Actualizar Stock después de Pedido");
+                Console.WriteLine("15. Resumen de Ventas por Categoría");
+                Console.WriteLine("16. Generar Factura desde Pedido");
                 Console.WriteLine("0. Salir");
                 Console.WriteLine();
                 Console.Write("Opción: ");
@@ -36,7 +46,17 @@ namespace CRUD_Consola._4UI
                     case "3": Console.Clear(); BuscarPedidoUI(); break;
                     case "4": Console.Clear(); /**ActualizarPedidoUI()**/; break;
                     case "5": Console.Clear(); EliminarPedidoUI(); break;
-                    case "6": Console.Clear(); MostrarPedidosDetallados(); break;
+                    case "6": Console.Clear(); GetPedidosConClienteYEmpleado(); break;
+                    case "7": Console.Clear(); ListarPorClienteUI(); break;
+                    case "8": Console.Clear(); ListarPorEmpleadoUI(); break;
+                    case "9": Console.Clear(); ListarPorSucursalUI(); break;
+                    case "10": Console.Clear(); ListarPorFechaUI(); break;
+                    case "11": Console.Clear(); MostrarPedidoCompletoUI(); break;
+                    case "12": Console.Clear(); CalcularTotalUI(); break;
+                    case "13": Console.Clear(); VerificarStockUI(); break;
+                    case "14": Console.Clear(); ActualizarStockUI(); break;
+                    case "15": Console.Clear(); ResumenVentasUI(); break;
+                    case "16": Console.Clear(); GenerarFacturaUI(); break;
                     case "0": salir = true; break;
                     default: Console.WriteLine("❌ Opción inválida."); break;
                 }
@@ -122,10 +142,10 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("✅ Producto eliminado correctamente.");
         }
 
-        public void MostrarPedidosDetallados()
+        public void GetPedidosConClienteYEmpleado()
         {
             Console.Clear();
-            var pedido = _uow.PedidoService.ObtenerPedidosDetallados();
+            var pedido = _uow.PedidoService.GetPedidosConClienteYEmpleado();
 
             Console.WriteLine("=== Lista de Pedido con Cliente y Empleado ===");
             foreach (var p in pedido)
@@ -133,6 +153,108 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine($"{p.PedidoId}, {p.Cliente.Nombres}, {p.Empleado.Nombres}, {p.Fecha}");
             }
             Console.WriteLine();
+        }
+
+        private void ListarPorClienteUI()
+        {
+            Console.Write("ClienteId: ");
+            var clienteId = Convert.ToInt32(Console.ReadLine());
+            var pedidos = _uow.PedidoService.GetPedidosPorCliente(clienteId);
+            foreach (var p in pedidos)
+                Console.WriteLine($"{p.PedidoId} - {p.Cliente.Nombres} - {p.Fecha}");
+        }
+
+        private void ListarPorEmpleadoUI()
+        {
+            Console.Write("EmpleadoId: ");
+            var empleadoId = Convert.ToInt32(Console.ReadLine());
+            var pedidos = _uow.PedidoService.GetPedidosPorEmpleado(empleadoId);
+            foreach (var p in pedidos)
+                Console.WriteLine($"{p.PedidoId} - {p.Empleado.Nombres} - {p.Fecha}");
+        }
+
+        private void ListarPorSucursalUI()
+        {
+            Console.Write("SucursalId: ");
+            var sucursalId = Convert.ToInt32(Console.ReadLine());
+            var pedidos = _uow.PedidoService.GetPedidosPorSucursal(sucursalId);
+            foreach (var p in pedidos)
+                Console.WriteLine($"{p.PedidoId} - {p.Empleado.Nombres} - {p.Fecha}");
+        }
+
+        private void ListarPorFechaUI()
+        {
+            Console.Write("Fecha inicio (yyyy-MM-dd): ");
+            var inicio = DateTime.Parse(Console.ReadLine());
+            Console.Write("Fecha fin (yyyy-MM-dd): ");
+            var fin = DateTime.Parse(Console.ReadLine());
+
+            var pedidos = _uow.PedidoService.GetPedidosPorFecha(inicio, fin);
+            foreach (var p in pedidos)
+                Console.WriteLine($"{p.PedidoId} - {p.Cliente.Nombres} - {p.Fecha}");
+        }
+
+        private void MostrarPedidoCompletoUI()
+        {
+            Console.Write("PedidoId: ");
+            var pedidoId = Convert.ToInt32(Console.ReadLine());
+            var pedido = _uow.PedidoService.GetPedidoCompleto(pedidoId);
+
+            if (pedido == null)
+            {
+                Console.WriteLine("❌ Pedido no encontrado.");
+                return;
+            }
+
+            Console.WriteLine($"Pedido {pedido.PedidoId} - Cliente: {pedido.Cliente.Nombres} - Empleado: {pedido.Empleado.Nombres}");
+            foreach (var d in pedido.Detalles)
+                Console.WriteLine($"{d.Producto.Nombre} x{d.Cantidad} = {(d.Cantidad * d.PrecioUnitario):C2}");
+            Console.WriteLine($"Total: {pedido.Factura?.MontoTotal ?? 0:C2}");
+        }
+
+        private void CalcularTotalUI()
+        {
+            Console.Write("PedidoId: ");
+            var pedidoId = Convert.ToInt32(Console.ReadLine());
+            var total = _uow.PedidoService.CalcularTotalPedido(pedidoId);
+            Console.WriteLine($"Total del pedido: {total:C2}");
+        }
+
+        private void VerificarStockUI()
+        {
+            Console.Write("PedidoId: ");
+            var pedidoId = Convert.ToInt32(Console.ReadLine());
+            var ok = _uow.PedidoService.VerificarStock(pedidoId);
+            Console.WriteLine(ok ? "✅ Stock suficiente." : "❌ Stock insuficiente.");
+        }
+
+        private void ActualizarStockUI()
+        {
+            Console.Write("PedidoId: ");
+            var pedidoId = Convert.ToInt32(Console.ReadLine());
+            _uow.PedidoService.ActualizarStockDespuesDePedido(pedidoId);
+            _uow.SaveChanges();
+            Console.WriteLine("✅ Stock actualizado.");
+        }
+
+        private void ResumenVentasUI()
+        {
+            var resumen = _uow.PedidoService.GetResumenVentasPorCategoria();
+            Console.WriteLine("=== Resumen de Ventas por Categoría ===");
+            foreach (var r in resumen)
+                Console.WriteLine($"{r}");
+        }
+
+        private void GenerarFacturaUI()
+        {
+            Console.Write("PedidoId: ");
+            var pedidoId = Convert.ToInt32(Console.ReadLine());
+            var factura = _uow.PedidoService.GenerarFacturaDesdePedido(pedidoId);
+
+            if (factura == null)
+                Console.WriteLine("❌ No se pudo generar la factura.");
+            else
+                Console.WriteLine($"✅ Factura {factura.FacturaId} generada con total {factura.MontoTotal:C2}");
         }
 
         private Pedido CapturarDatosPedido()
