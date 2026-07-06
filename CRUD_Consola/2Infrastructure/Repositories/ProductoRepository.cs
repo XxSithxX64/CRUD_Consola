@@ -15,6 +15,6 @@ namespace CRUD_Consola._2Infrastructure.Repositories
             return dbSet.Include(p => p.Categoria)
                         .Include(p => p.Proveedor)
                         .ToList();
-        }       
+        }
     }
 }

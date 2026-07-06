@@ -3,68 +3,65 @@ using CRUD_Consola._2Infrastructure.Repositories;
 using CRUD_Consola._3Application.Services;
 using CRUD_Consola.Core.Entities;
 using CRUD_Consola.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola._3Application.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
         //UnitOfWork con Lazy Loading
-        private readonly AppDbContext context;
+        private readonly AppDbContext _context;
+        private readonly IService<Cliente> _clienteService; //IService<Cliente>? el signo asume que puede ser nulo, y evita el warning de compilación
+        private readonly IService<Sucursal> _sucursalService;
+        private readonly IService<Proveedor> _proveedorService;
+        private readonly IService<Categoria> _categoriaService;
+        private readonly IProductoService _productoService;
+        private readonly IEmpleadoService _empleadoService;
+        private readonly IPedidoService _pedidoService;
+        private readonly IDetallePedidoService _detallePedidoService;
+        private readonly IFacturaService _facturaService;
+        private readonly IPagoService? _pagoService;
 
-        private IService<Cliente>? _clienteService; //? el signo asume que puede ser nulo, y evita el warning de compilación
-        private IService<Sucursal>? _sucursalService;
-        private IService<Proveedor>? _proveedorService;
-        private IService<Categoria>? _categoriaService;
-        private IProductoService? _productoService;
-        private IEmpleadoService? _empleadoService;
-        private IPedidoService? _pedidoService;
-        private IDetallePedidoService? _detallePedidoService;
-        private IFacturaService? _facturaService;
-        private IPagoService? _pagoService;
-
-        public UnitOfWork(AppDbContext context)
+        public UnitOfWork(
+        AppDbContext context,
+        IService<Cliente> clienteService,
+        IService<Sucursal> sucursalService,
+        IService<Proveedor> proveedorService,
+        IService<Categoria> categoriaService,
+        IProductoService productoService,
+        IEmpleadoService empleadoService,
+        IPedidoService pedidoService,
+        IDetallePedidoService detallePedidoService,
+        IFacturaService facturaService,
+        IPagoService pagoService)
         {
-            this.context = context;
+            _context = context;
+            _clienteService = clienteService;
+            _sucursalService = sucursalService;
+            _proveedorService = proveedorService;
+            _categoriaService = categoriaService;
+            _productoService = productoService;
+            _empleadoService = empleadoService;
+            _pedidoService = pedidoService;
+            _detallePedidoService = detallePedidoService;
+            _facturaService = facturaService;
+            _pagoService = pagoService;
         }
 
-
-        //??=si _clienteService es nulo, créalo; si ya existe, úsalo
-        public IService<Cliente> ClienteService =>
-        _clienteService ??= new Service<Cliente>(new Repository<Cliente>(context));
-
-        public IService<Sucursal> SucursalService =>
-            _sucursalService ??= new Service<Sucursal>(new Repository<Sucursal>(context));
-
-        public IService<Proveedor> ProveedorService =>
-            _proveedorService ??= new Service<Proveedor>(new Repository<Proveedor>(context));
-
-        public IService<Categoria> CategoriaService =>
-            _categoriaService ??= new Service<Categoria>(new Repository<Categoria>(context));
-
-        public IProductoService ProductoService =>
-            _productoService ??= new ProductoService(new ProductoRepository(context));         
-
-        public IPedidoService IPedidoService =>
-            _pedidoService ??= new PedidoService(new PedidoRepository(context));
-
-        public IEmpleadoService EmpleadoService =>
-            _empleadoService ??= new EmpleadoService(new EmpleadoRepository(context));
-
-        public IPedidoService PedidoService => 
-            _pedidoService ??= new PedidoService(new PedidoRepository(context));
-
-        public IDetallePedidoService DetallePedidoService =>
-            _detallePedidoService ??= new DetallePedidoService(new DetallePedidoRepository(context));
-
-        public IFacturaService FacturaService => 
-            _facturaService ??= new FacturaService(new FacturaRepository(context));
-
-        public IPagoService PagoService => 
-            _pagoService ??= new PagoService(new PagoRepository(context));
+        public IService<Cliente> ClienteService => _clienteService;
+        public IService<Sucursal> SucursalService => _sucursalService;
+        public IService<Proveedor> ProveedorService => _proveedorService;
+        public IService<Categoria> CategoriaService => _categoriaService;
+        public IProductoService ProductoService => _productoService;
+        public IEmpleadoService EmpleadoService => _empleadoService;
+        public IPedidoService PedidoService => _pedidoService;
+        public IDetallePedidoService DetallePedidoService => _detallePedidoService;
+        public IFacturaService FacturaService => _facturaService;
+        public IPagoService PagoService => _pagoService;
 
         public void SaveChanges()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

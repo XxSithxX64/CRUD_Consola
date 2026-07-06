@@ -43,7 +43,7 @@ namespace CRUD_Consola._4UI
             }
         }
 
-        private void CrearProductoUI() 
+        private void CrearProductoUI()
         {
             Console.Clear();
             Console.WriteLine("Ingrese los datos del producto:");
@@ -74,7 +74,7 @@ namespace CRUD_Consola._4UI
             Console.Write("Ingrese el ID del producto: ");
             var id = Convert.ToInt32(Console.ReadLine());
             var producto = _uow.ProductoService.Buscar(id);
-            if(producto != null)
+            if (producto != null)
                 Console.WriteLine(producto.ToString());
             else
                 Console.WriteLine("❌ Producto no encontrado.");
@@ -88,16 +88,16 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("--------------------");
             Console.Write("Ingrese el ID del producto a actualizar: ");
             var id = Convert.ToInt32(Console.ReadLine());
-            var producto= _uow.ProductoService.Buscar(id);
-            
-            if(producto== null)
+            var producto = _uow.ProductoService.Buscar(id);
+
+            if (producto == null)
             {
                 Console.WriteLine("❌ Producto no encontrado.");
                 return;
             }
 
             Console.WriteLine("Ingrese nuevos datos (dejar vacío para mantener el actual):");
-            
+
             Console.WriteLine($"Nombre ({producto.Nombre}): ");
             var nombre = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(nombre)) producto.Nombre = nombre;
@@ -105,10 +105,10 @@ namespace CRUD_Consola._4UI
             Console.WriteLine($"Precio ({producto.Precio}): ");
             decimal precio = decimal.Parse(Console.ReadLine());
             if (!string.IsNullOrWhiteSpace(precio.ToString())) producto.Precio = precio;
-            
+
             Console.WriteLine($"Stock ({producto.Stock}): ");
             var stock = Convert.ToInt32(Console.ReadLine());
-            if(!string.IsNullOrWhiteSpace(stock.ToString())) producto.Stock = stock;
+            if (!string.IsNullOrWhiteSpace(stock.ToString())) producto.Stock = stock;
 
             // Mostrar categorías
             Console.WriteLine("=== Categorías disponibles ===");
@@ -118,7 +118,7 @@ namespace CRUD_Consola._4UI
             }
             Console.WriteLine($"CategoriaId ({producto.CategoriaId}): ");
             var categoriaId = Convert.ToInt32(Console.ReadLine());
-            if(!string.IsNullOrWhiteSpace(categoriaId.ToString())) producto.CategoriaId = categoriaId;
+            if (!string.IsNullOrWhiteSpace(categoriaId.ToString())) producto.CategoriaId = categoriaId;
 
             // Mostrar proveedores
             Console.WriteLine("=== Proveedores disponibles ===");
@@ -128,7 +128,7 @@ namespace CRUD_Consola._4UI
             }
             Console.WriteLine($"ProveedorId ({producto.ProveedorId}): ");
             var proveedorId = Convert.ToInt32(Console.ReadLine());
-            if(!string.IsNullOrWhiteSpace(proveedorId.ToString())) producto.ProveedorId = proveedorId;
+            if (!string.IsNullOrWhiteSpace(proveedorId.ToString())) producto.ProveedorId = proveedorId;
 
             _uow.ProductoService.Actualizar(producto);
             _uow.SaveChanges();

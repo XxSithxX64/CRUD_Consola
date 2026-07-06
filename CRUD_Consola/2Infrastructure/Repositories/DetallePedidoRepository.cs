@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola._2Infrastructure.Repositories
 {
-    public class DetallePedidoRepository : Repository<DetallePedido>, IDetallePedidoRepository     
+    public class DetallePedidoRepository : Repository<DetallePedido>, IDetallePedidoRepository
     {
         public DetallePedidoRepository(AppDbContext context) : base(context)
         {

@@ -18,7 +18,7 @@ namespace CRUD_Consola.Infrastructure.Data
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Sucursal> Sucursales { get; set; }
-        
+
 
 
     }

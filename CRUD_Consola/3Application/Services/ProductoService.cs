@@ -15,5 +15,5 @@ namespace CRUD_Consola._3Application.Services
         {
             return productoRepository.ListarConRelaciones();
         }
-    }        
+    }
 }

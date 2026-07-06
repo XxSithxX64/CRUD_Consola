@@ -70,7 +70,7 @@ namespace CRUD_Consola._4UI
             var categoria = _uow.CategoriaService.Buscar(id);
             if (categoria != null)
                 Console.WriteLine(categoria.ToString());
-            else 
+            else
                 Console.WriteLine("❌ Categoría no encontrada.");
         }
 
@@ -86,16 +86,16 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("❌ Categoría no encontrada.");
                 return;
             }
-            
+
             Console.WriteLine("Ingrese nuevos datos (dejar vacío para mantener el actual):");
 
             Console.Write($"Nombre ({categoria.Nombre}): ");
             var nombre = Console.ReadLine();
-            if(!string.IsNullOrWhiteSpace(nombre)) categoria.Nombre = nombre;
+            if (!string.IsNullOrWhiteSpace(nombre)) categoria.Nombre = nombre;
 
             Console.WriteLine($"Descripcion ({categoria.Descripcion}): ");
             var descripcion = Console.ReadLine();
-            if(!string.IsNullOrWhiteSpace(descripcion)) categoria.Descripcion = descripcion;
+            if (!string.IsNullOrWhiteSpace(descripcion)) categoria.Descripcion = descripcion;
 
             _uow.CategoriaService.Actualizar(categoria);
             _uow.SaveChanges();

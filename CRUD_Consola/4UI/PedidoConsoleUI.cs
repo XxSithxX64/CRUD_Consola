@@ -94,9 +94,9 @@ namespace CRUD_Consola._4UI
             Console.Write("Ingrese el ID del pedido a buscar: ");
             var id = Convert.ToInt32(Console.ReadLine());
             var producto = _uow.PedidoService.Buscar(id);
-            if(producto != null)
+            if (producto != null)
                 Console.WriteLine(producto.ToString());
-            else 
+            else
                 Console.WriteLine("❌ Pedido no encontrado.");
             Console.WriteLine();
         }
@@ -114,7 +114,7 @@ namespace CRUD_Consola._4UI
                 Console.WriteLine("❌ Pedido no encontrado.");
                 return;
             }
-            
+
             Console.WriteLine("Ingrese nuevos datos (dejar vacío para mantener el actual):");
 
 
@@ -124,7 +124,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine();
         }
 
-        private void EliminarPedidoUI() 
+        private void EliminarPedidoUI()
         {
             Console.Clear();
             Console.WriteLine("Eliminar Pedido:");
@@ -132,7 +132,7 @@ namespace CRUD_Consola._4UI
             Console.WriteLine("Ingrese el ID del pedido a eliminar: ");
             var id = Convert.ToInt32(Console.ReadLine());
             var pedido = _uow.PedidoService.Buscar(id);
-            if(pedido == null)
+            if (pedido == null)
             {
                 Console.WriteLine("❌ Pedido no encontrado.");
                 return;

@@ -94,7 +94,7 @@ namespace CRUD_Consola._4UI
 
             Console.Write($"Nombre ({empleado.Nombres}): ");
             var nombre = Console.ReadLine();
-            if(!string.IsNullOrWhiteSpace(nombre)) empleado.Nombres = nombre;
+            if (!string.IsNullOrWhiteSpace(nombre)) empleado.Nombres = nombre;
 
             Console.Write($"Apellido Paterno ({empleado.ApellidoPat}): ");
             var apellidoPat = Console.ReadLine();

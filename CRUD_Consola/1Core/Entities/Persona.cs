@@ -6,7 +6,7 @@ namespace CRUD_Consola.Core.Entities
     {
         [Key]
         public int PersonaId { get; set; }
-        public string Nombres { get; set; } 
+        public string Nombres { get; set; }
         public string ApellidoPat { get; set; }
         public string ApellidoMat { get; set; }
         public string DocIdentidad { get; set; } = string.Empty; // DNI, RUC, etc.

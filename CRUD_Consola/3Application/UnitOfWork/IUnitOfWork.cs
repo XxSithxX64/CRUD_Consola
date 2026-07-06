@@ -6,8 +6,8 @@ namespace CRUD_Consola._3Application.UnitOfWork
     public interface IUnitOfWork
     {
         IService<Cliente> ClienteService { get; }
-        IService<Sucursal>SucursalService { get; }
-        IService<Proveedor>ProveedorService { get; }
+        IService<Sucursal> SucursalService { get; }
+        IService<Proveedor> ProveedorService { get; }
         IService<Categoria> CategoriaService { get; }
         IProductoService ProductoService { get; }
         IEmpleadoService EmpleadoService { get; }

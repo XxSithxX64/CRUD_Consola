@@ -2,7 +2,7 @@
 
 namespace CRUD_Consola._1Core.IRepository
 {
-    public interface IFacturaRepository : IRepository<Factura> 
+    public interface IFacturaRepository : IRepository<Factura>
     {
         Factura GetByPedido(int pedidoId);
         Factura GetWithPagos(int facturaId);

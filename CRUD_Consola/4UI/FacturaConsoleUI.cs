@@ -1,8 +1,5 @@
 ﻿using CRUD_Consola._3Application.UnitOfWork;
 using CRUD_Consola.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CRUD_Consola._4UI
 {
