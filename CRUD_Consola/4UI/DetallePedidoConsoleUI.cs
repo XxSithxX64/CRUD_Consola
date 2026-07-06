@@ -12,7 +12,7 @@ namespace CRUD_Consola._4UI
             _uow = uow;
         }
 
-        public void Monstrar()
+        public void MostrarMenu()
         {
             bool salir = false;
             while (salir)

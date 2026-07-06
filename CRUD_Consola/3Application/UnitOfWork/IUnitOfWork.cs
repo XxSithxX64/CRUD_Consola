@@ -13,6 +13,7 @@ namespace CRUD_Consola._3Application.UnitOfWork
         IEmpleadoService EmpleadoService { get; }
         IPedidoService PedidoService { get; }
         IDetallePedidoService DetallePedidoService { get; }
+        IFacturaService FacturaService { get; }
         void SaveChanges();
     }
 }
