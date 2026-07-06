@@ -4,7 +4,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class DetallePedidoService : Service<DetallePedido>, IDetallePedidoService
+    public class DetallePedidoService : Service<DetallePedido>, IDetallePedidoService
     {
         private readonly IDetallePedidoRepository detallePedidoRepository;
         public DetallePedidoService(IDetallePedidoRepository detallePedidoRepository) : base(detallePedidoRepository)

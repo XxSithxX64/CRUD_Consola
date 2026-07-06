@@ -14,6 +14,7 @@ namespace CRUD_Consola._3Application.UnitOfWork
         IPedidoService PedidoService { get; }
         IDetallePedidoService DetallePedidoService { get; }
         IFacturaService FacturaService { get; }
+        IPagoService PagoService { get; }
         void SaveChanges();
     }
 }

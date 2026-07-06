@@ -20,6 +20,7 @@ namespace CRUD_Consola._3Application.UnitOfWork
         private IPedidoService? _pedidoService;
         private IDetallePedidoService? _detallePedidoService;
         private IFacturaService? _facturaService;
+        private IPagoService? _pagoService;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -57,6 +58,9 @@ namespace CRUD_Consola._3Application.UnitOfWork
 
         public IFacturaService FacturaService => 
             _facturaService ??= new FacturaService(new FacturaRepository(context));
+
+        public IPagoService PagoService => 
+            _pagoService ??= new PagoService(new PagoRepository(context));
 
         public void SaveChanges()
         {

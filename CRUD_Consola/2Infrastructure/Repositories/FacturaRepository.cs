@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CRUD_Consola._2Infrastructure.Repositories
 {
-    internal class FacturaRepository : Repository<Factura>, IFacturaRepository
+    public class FacturaRepository : Repository<Factura>, IFacturaRepository
     {
         public FacturaRepository(AppDbContext context) : base(context)
         {

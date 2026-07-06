@@ -4,7 +4,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
-    internal class PedidoConsoleUI
+    public class PedidoConsoleUI
     {
         private readonly IUnitOfWork _uow;
 

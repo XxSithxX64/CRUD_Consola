@@ -4,7 +4,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class FacturaService : Service<Factura>, IFacturaService
+    public class FacturaService : Service<Factura>, IFacturaService
     {
         private readonly IFacturaRepository facturaRepository;
         public FacturaService(IFacturaRepository facturaRepository) : base(facturaRepository)

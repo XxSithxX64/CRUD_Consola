@@ -4,7 +4,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._3Application.Services
 {
-    internal class PedidoService : Service<Pedido>, IPedidoService
+    public class PedidoService : Service<Pedido>, IPedidoService
     {
         private readonly IPedidoRepository pedidoRepository;
 

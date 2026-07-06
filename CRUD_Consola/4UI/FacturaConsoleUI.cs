@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CRUD_Consola._4UI
 {
-    internal class FacturaConsoleUI
+    public class FacturaConsoleUI
     {
         private readonly IUnitOfWork _uow;
 

@@ -3,7 +3,7 @@ using CRUD_Consola.Core.Entities;
 
 namespace CRUD_Consola._4UI
 {
-    internal class DetallePedidoConsoleUI
+    public class DetallePedidoConsoleUI
     {
         private readonly IUnitOfWork _uow;
 
