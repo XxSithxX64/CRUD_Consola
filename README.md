@@ -496,7 +496,6 @@ DatabaseConUtils.EnsureDatabaseCreated(dbContext);
 - [ ] Retry Policy para resiliencia
 - [ ] Transacciones explícitas para operaciones complejas
 - [ ] Migración a API Web (ASP.NET Core)
-- [ ] Interfaz Blazor/MAUI
 
 ---
 
